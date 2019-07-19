@@ -25,6 +25,22 @@ func (cc *Chaincode) Init(stub shim.ChaincodeStubInterface) sc.Response {
 // Invoke is called as a result of an application request to run the chaincode.
 func (cc *Chaincode) Invoke(stub shim.ChaincodeStubInterface) sc.Response {
 	fcn, params := stub.GetFunctionAndParameters()
-	fmt.Println("Invoke()", fcn, params)
+	var result string
+	var err string
+	if fcn == "createPatient" {
+		result, err = createPatient(stub, params)
+	}
+	if err != nil {
+		return shim.Error(err.Error())
+	}
+
 	return shim.Success(nil)
+}
+
+func createPatient(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+	if len(args) != 5 {
+		return "", fmt.Errorf("Failed to create Patient: The number of arguments is incorrect")
+	}
+
+	value, err := stub.
 }
