@@ -5,6 +5,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"strconv"
@@ -44,7 +45,9 @@ func (cc *Chaincode) Invoke(stub shim.ChaincodeStubInterface) sc.Response {
 	fcn, params := stub.GetFunctionAndParameters()
 	var result []byte
 	var err error
-	if fcn == "CreatePatient" {
+	if fcn == "GetAllPatients" {
+		result, err = cc.GetAllPatients(stub)
+	} else if fcn == "CreatePatient" {
 		result, err = cc.CreatePatient(stub, params)
 	} else if fcn == "AddRecordToPatient" {
 		result, err = cc.AddRecordToPatient(stub, params)
@@ -104,4 +107,40 @@ func (cc *Chaincode) AddRecordToPatient(stub shim.ChaincodeStubInterface, args [
 	stub.PutState(args[0], existingPatientAsBytes)
 	return existingPatientAsBytes, nil
 
+}
+
+func (cc *Chaincode) GetAllPatients(stub shim.ChaincodeStubInterface) ([]byte, error) {
+	iterator, err := stub.GetStateByRange("", "")
+	if err != nil {
+		return nil, fmt.Errorf("Failed to get all Patients")
+	}
+
+	defer iterator.Close()
+
+	var buffer bytes.Buffer
+	first := true
+	buffer.WriteString("[")
+
+	for iterator.HasNext() {
+		next, err := iterator.Next()
+		if err != nil {
+			return nil, fmt.Errorf("Failed to get all Patients")
+		}
+
+		if first == false {
+			buffer.WriteString(", ")
+		} else {
+			first = false
+		}
+
+		buffer.WriteString("{ Key: ")
+		buffer.WriteString(next.Key)
+		buffer.WriteString(", Value: ")
+		buffer.Write(next.Value)
+		buffer.WriteString("}")
+	}
+
+	buffer.WriteString("]")
+
+	return buffer.Bytes(), nil
 }
