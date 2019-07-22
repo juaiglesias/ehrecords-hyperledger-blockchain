@@ -44,7 +44,7 @@ func (cc *Chaincode) Invoke(stub shim.ChaincodeStubInterface) sc.Response {
 	var result []byte
 	var err error
 	if fcn == "CreatePatient" {
-		result, err = createPatient(stub, params)
+		result, err = CreatePatient(stub, params)
 	} else if fcn == "AddRecordToPatient" {
 	}
 	if err != nil {
