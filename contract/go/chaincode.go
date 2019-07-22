@@ -5,11 +5,27 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"strconv"
+	"time"
 
 	"github.com/hyperledger/fabric/core/chaincode/shim"
 	sc "github.com/hyperledger/fabric/protos/peer"
 )
+
+type Record struct {
+	Information string    `json:"information"`
+	Date        time.Time `json:"date"`
+	DoctorId    string    `json:"doctorId"`
+}
+
+type Patient struct {
+	FirstName string `json:"firstName"`
+	LastName  string `json:"lastName"`
+	Age       uint8  `json:"age"`
+	Address   string `json:"address"`
+}
 
 // Chaincode is the definition of the chaincode structure.
 type Chaincode struct {
@@ -25,22 +41,37 @@ func (cc *Chaincode) Init(stub shim.ChaincodeStubInterface) sc.Response {
 // Invoke is called as a result of an application request to run the chaincode.
 func (cc *Chaincode) Invoke(stub shim.ChaincodeStubInterface) sc.Response {
 	fcn, params := stub.GetFunctionAndParameters()
-	var result string
-	var err string
-	if fcn == "createPatient" {
+	var result []byte
+	var err error
+	if fcn == "CreatePatient" {
 		result, err = createPatient(stub, params)
+	} else if fcn == "AddRecordToPatient" {
 	}
 	if err != nil {
 		return shim.Error(err.Error())
 	}
 
-	return shim.Success(nil)
+	return shim.Success(result)
 }
 
-func createPatient(stub shim.ChaincodeStubInterface, args []string) (string, error) {
+func CreatePatient(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	if len(args) != 5 {
-		return "", fmt.Errorf("Failed to create Patient: The number of arguments is incorrect")
+		return nil, fmt.Errorf("Failed to create Patient: The number of arguments is incorrect")
 	}
 
-	value, err := stub.
+	//Create new Patient
+	var ageConverted, err = strconv.ParseUint(args[3], 10, 8)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to create Patient: Age is not a valid number")
+	}
+
+	var newPatient = Patient{FirstName: args[1], LastName: args[2], Age: uint8(ageConverted), Address: args[4]}
+
+	newPatientAsBytes, err := json.Marshal(newPatient)
+	if err != nil {
+		return nil, fmt.Errorf("Failed to create Patient")
+	}
+
+	stub.PutState(args[0], newPatientAsBytes)
+	return newPatientAsBytes, nil
 }
