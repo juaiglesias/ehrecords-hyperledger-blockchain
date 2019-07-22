@@ -21,10 +21,11 @@ type Record struct {
 }
 
 type Patient struct {
-	FirstName string `json:"firstName"`
-	LastName  string `json:"lastName"`
-	Age       uint8  `json:"age"`
-	Address   string `json:"address"`
+	FirstName string   `json:"firstName"`
+	LastName  string   `json:"lastName"`
+	Age       uint8    `json:"age"`
+	Address   string   `json:"address"`
+	Records   []Record `json:"records"`
 }
 
 // Chaincode is the definition of the chaincode structure.
@@ -44,8 +45,9 @@ func (cc *Chaincode) Invoke(stub shim.ChaincodeStubInterface) sc.Response {
 	var result []byte
 	var err error
 	if fcn == "CreatePatient" {
-		result, err = CreatePatient(stub, params)
+		result, err = cc.CreatePatient(stub, params)
 	} else if fcn == "AddRecordToPatient" {
+		result, err = cc.AddRecordToPatient(stub, params)
 	}
 	if err != nil {
 		return shim.Error(err.Error())
@@ -54,7 +56,7 @@ func (cc *Chaincode) Invoke(stub shim.ChaincodeStubInterface) sc.Response {
 	return shim.Success(result)
 }
 
-func CreatePatient(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+func (cc *Chaincode) CreatePatient(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
 	if len(args) != 5 {
 		return nil, fmt.Errorf("Failed to create Patient: The number of arguments is incorrect")
 	}
@@ -65,7 +67,7 @@ func CreatePatient(stub shim.ChaincodeStubInterface, args []string) ([]byte, err
 		return nil, fmt.Errorf("Failed to create Patient: Age is not a valid number")
 	}
 
-	var newPatient = Patient{FirstName: args[1], LastName: args[2], Age: uint8(ageConverted), Address: args[4]}
+	var newPatient = Patient{FirstName: args[1], LastName: args[2], Age: uint8(ageConverted), Address: args[4], Records: []Record{}}
 
 	newPatientAsBytes, err := json.Marshal(newPatient)
 	if err != nil {
@@ -74,4 +76,32 @@ func CreatePatient(stub shim.ChaincodeStubInterface, args []string) ([]byte, err
 
 	stub.PutState(args[0], newPatientAsBytes)
 	return newPatientAsBytes, nil
+}
+
+func (cc *Chaincode) AddRecordToPatient(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	if len(args) != 3 {
+		return nil, fmt.Errorf("Failed to add Record: The number of arguments is incorrect")
+	}
+
+	//Create the record
+	var newRecord = Record{Information: args[1], Date: time.Now(), DoctorId: args[2]}
+
+	existingPatientAsBytes, err := stub.GetState(args[0])
+	if err != nil {
+		return nil, fmt.Errorf("Failed to add Record: Could not get the patient")
+	}
+
+	existingPatient := Patient{}
+	json.Unmarshal(existingPatientAsBytes, &existingPatient)
+	existingPatient.Records = append(existingPatient.Records, newRecord)
+
+	existingPatientAsBytes, err = json.Marshal(existingPatient)
+
+	if err != nil {
+		return nil, fmt.Errorf("Failed to add Record")
+	}
+
+	stub.PutState(args[0], existingPatientAsBytes)
+	return existingPatientAsBytes, nil
+
 }
