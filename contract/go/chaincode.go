@@ -47,6 +47,8 @@ func (cc *Chaincode) Invoke(stub shim.ChaincodeStubInterface) sc.Response {
 	var err error
 	if fcn == "GetAllPatients" {
 		result, err = cc.GetAllPatients(stub)
+	} else if fcn == "GetPatient" {
+		result, err = cc.GetPatient(stub, params)
 	} else if fcn == "CreatePatient" {
 		result, err = cc.CreatePatient(stub, params)
 	} else if fcn == "AddRecordToPatient" {
@@ -106,7 +108,24 @@ func (cc *Chaincode) AddRecordToPatient(stub shim.ChaincodeStubInterface, args [
 
 	stub.PutState(args[0], existingPatientAsBytes)
 	return existingPatientAsBytes, nil
+}
 
+func (cc *Chaincode) GetPatient(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
+	if len(args) != 1 {
+		return nil, fmt.Errorf("Failed to get Patient: The number of arguments is incorrect")
+	}
+
+	patientAsBytes, err := stub.GetState(args[0])
+
+	if err != nil {
+		return nil, fmt.Errorf("Failed to get Patient %s", args[0])
+	}
+
+	if patientAsBytes == nil {
+		return nil, fmt.Errorf("Failed to get Patient %s: It doet not exists", args[0])
+	}
+
+	return patientAsBytes, nil
 }
 
 func (cc *Chaincode) GetAllPatients(stub shim.ChaincodeStubInterface) ([]byte, error) {
