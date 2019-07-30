@@ -84,12 +84,18 @@ func (cc *Chaincode) CreatePatient(stub shim.ChaincodeStubInterface, args []stri
 }
 
 func (cc *Chaincode) AddRecordToPatient(stub shim.ChaincodeStubInterface, args []string) ([]byte, error) {
-	if len(args) != 3 {
+	if len(args) != 4 {
 		return nil, fmt.Errorf("Failed to add Record: The number of arguments is incorrect")
 	}
 
+	//Parse to Time the date
+	myDate, err := time.Parse("2006-01-02 15:04", args[2])
+	if err != nil {
+		return nil, fmt.Errorf("Failed to add Record: Date is not valid")
+	}
+
 	//Create the record
-	var newRecord = Record{Information: args[1], Date: time.Now(), DoctorId: args[2]}
+	var newRecord = Record{Information: args[1], Date: myDate, DoctorId: args[3]}
 
 	existingPatientAsBytes, err := stub.GetState(args[0])
 	if err != nil {
