@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/:id', (req, res) => {
-    patientsController.getPatient(id)
+    patientsController.getPatient(req.params.id)
         .then((patient) => {
             res.send(JSON.parse(patient))
         });

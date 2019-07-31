@@ -1,4 +1,5 @@
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
+const FabricCAServices = require('fabric-ca-client');
 const fs = require('fs');
 const path = require('path');
 
@@ -57,7 +58,7 @@ exports.registerUser = async function() {
         console.log('Successfully registered and enrolled admin user ' + userName + ' and imported it into the wallet');
 
     } catch (error) {
-        console.error('Failed to register user ' + userName + ': ${error}');
+        console.error(`Failed to register user ${userName} : ${error}`);
         process.exit(1);
     }
 }
@@ -78,7 +79,6 @@ exports.registerAdmin = async function() {
             console.log('An identity for the admin user "admin" already exists in the wallet');
             return;
         }
-
         // Enroll the admin user, and import the new identity into the wallet.
         const enrollment = await ca.enroll({ enrollmentID: appAdmin, enrollmentSecret: appAdminSecret });
         const identity = X509WalletMixin.createIdentity(orgMSPID, enrollment.certificate, enrollment.key.toBytes());
@@ -86,7 +86,7 @@ exports.registerAdmin = async function() {
         console.log('msg: Successfully enrolled admin user ' + appAdmin + ' and imported it into the wallet');
 
     } catch (error) {
-        console.error('Failed to enroll admin user ' + appAdmin + ': ${error}');
+        console.error(`Failed to enroll admin user ${appAdmin} : ${error}`);
         process.exit(1);
     }
 }

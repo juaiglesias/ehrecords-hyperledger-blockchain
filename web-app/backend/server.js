@@ -12,7 +12,7 @@ app.use(express.json());
 
 //Routes
 app.use('/api/patients/', require('./routes/patients.routes'));
-app.use('api/users/', require('./routes/users.routes'));
+app.use('/api/users/', require('./routes/users.routes'));
 
 app.listen(port, () =>  {
     console.log(`Server is running on port ${port}`);
