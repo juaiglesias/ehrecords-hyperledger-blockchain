@@ -1,0 +1,111 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+# Edited by Juan Iglesias
+
+version: '2'
+
+services:
+
+  orderer.ehrecords.com:
+    container_name: orderer.ehrecords.com
+    extends:
+      file: peer-base.yaml
+      service: orderer-base
+    volumes:
+        - ../channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ../crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer.ehrecords.com/msp:/var/hyperledger/orderer/msp
+        - ../crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer.ehrecords.com/tls/:/var/hyperledger/orderer/tls
+        - orderer.ehrecords.com:/var/hyperledger/production/orderer
+    ports:
+      - 7050:7050
+
+  peer0.hospital1.ehrecords.com:
+    container_name: peer0.hospital1.ehrecords.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.hospital1.ehrecords.com
+      - CORE_PEER_ADDRESS=peer0.hospital1.ehrecords.com:7051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:7051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.hospital1.ehrecords.com:7052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:7052
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hospital1.ehrecords.com:8051
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hospital1.ehrecords.com:7051
+      - CORE_PEER_LOCALMSPID=Hospital1MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/hospital1.ehrecords.com/peers/peer0.hospital1.ehrecords.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/hospital1.ehrecords.com/peers/peer0.hospital1.ehrecords.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.hospital1.ehrecords.com:/var/hyperledger/production
+    ports:
+      - 7051:7051
+
+  peer1.hospital1.ehrecords.com:
+    container_name: peer1.hospital1.ehrecords.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.hospital1.ehrecords.com
+      - CORE_PEER_ADDRESS=peer1.hospital1.ehrecords.com:8051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:8051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.hospital1.ehrecords.com:8052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:8052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hospital1.ehrecords.com:8051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hospital1.ehrecords.com:7051
+      - CORE_PEER_LOCALMSPID=Hospital1MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/hospital1.ehrecords.com/peers/peer1.hospital1.ehrecords.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/hospital1.ehrecords.com/peers/peer1.hospital1.ehrecords.com/tls:/etc/hyperledger/fabric/tls
+        - peer1.hospital1.ehrecords.com:/var/hyperledger/production
+
+    ports:
+      - 8051:8051
+
+  peer0.hospital2.ehrecords.com:
+    container_name: peer0.hospital2.ehrecords.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer0.hospital2.ehrecords.com
+      - CORE_PEER_ADDRESS=peer0.hospital2.ehrecords.com:9051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:9051
+      - CORE_PEER_CHAINCODEADDRESS=peer0.hospital2.ehrecords.com:9052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:9052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer0.hospital2.ehrecords.com:9051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer1.hospital2.ehrecords.com:10051
+      - CORE_PEER_LOCALMSPID=Hospital2MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/hospital2.ehrecords.com/peers/peer0.hospital2.ehrecords.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/hospital2.ehrecords.com/peers/peer0.hospital2.ehrecords.com/tls:/etc/hyperledger/fabric/tls
+        - peer0.hospital2.ehrecords.com:/var/hyperledger/production
+    ports:
+      - 9051:9051
+
+  peer1.hospital2.ehrecords.com:
+    container_name: peer1.hospital2.ehrecords.com
+    extends:
+      file: peer-base.yaml
+      service: peer-base
+    environment:
+      - CORE_PEER_ID=peer1.hospital2.ehrecords.com
+      - CORE_PEER_ADDRESS=peer1.hospital2.ehrecords.com:10051
+      - CORE_PEER_LISTENADDRESS=0.0.0.0:10051
+      - CORE_PEER_CHAINCODEADDRESS=peer1.hospital2.ehrecords.com:10052
+      - CORE_PEER_CHAINCODELISTENADDRESS=0.0.0.0:10052
+      - CORE_PEER_GOSSIP_EXTERNALENDPOINT=peer1.hospital2.ehrecords.com:10051
+      - CORE_PEER_GOSSIP_BOOTSTRAP=peer0.hospital2.ehrecords.com:9051
+      - CORE_PEER_LOCALMSPID=Hospital2MSP
+    volumes:
+        - /var/run/:/host/var/run/
+        - ../crypto-config/peerOrganizations/hospital2.ehrecords.com/peers/peer1.hospital2.ehrecords.com/msp:/etc/hyperledger/fabric/msp
+        - ../crypto-config/peerOrganizations/hospital2.ehrecords.com/peers/peer1.hospital2.ehrecords.com/tls:/etc/hyperledger/fabric/tls
+        - peer1.hospital2.ehrecords.com:/var/hyperledger/production
+    ports:
+      - 10051:10051
