@@ -2,6 +2,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 #
+# Edited by Juan Iglesias
 
 version: '2'
 
@@ -13,41 +14,41 @@ volumes:
   peer1.hospital2.ehrecords.com:
 
 networks:
-  ehrNetwork:
+  ehrecords:
 services:
-  ca0:
+  ca-hospital1:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca-hospital1
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital1.ehrecords.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA_HOSPITAL1_PRIVATE_KEY
     ports:
       - "7054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.hospital1.ehrecords.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA1_PRIVATE_KEY -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.hospital1.ehrecords.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA_HOSPITAL2_PRIVATE_KEY -b admin:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/hospital1.ehrecords.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca_peerHospital1
     networks:
-      - ehrNetwork
+      - ehrecords
 
-  ca1:
+  ca-hospital2:
     image: hyperledger/fabric-ca:$IMAGE_TAG
     environment:
       - FABRIC_CA_HOME=/etc/hyperledger/fabric-ca-server
       - FABRIC_CA_SERVER_CA_NAME=ca-hospital2
       - FABRIC_CA_SERVER_TLS_ENABLED=true
       - FABRIC_CA_SERVER_TLS_CERTFILE=/etc/hyperledger/fabric-ca-server-config/ca.hospital2.ehrecords.com-cert.pem
-      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA2_PRIVATE_KEY
+      - FABRIC_CA_SERVER_TLS_KEYFILE=/etc/hyperledger/fabric-ca-server-config/CA_HOSPITAL2_PRIVATE_KEY
     ports:
       - "8054:7054"
-    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.hospital2.ehrecords.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA2_PRIVATE_KEY -b admin:adminpw -d'
+    command: sh -c 'fabric-ca-server start --ca.certfile /etc/hyperledger/fabric-ca-server-config/ca.hospital2.ehrecords.com-cert.pem --ca.keyfile /etc/hyperledger/fabric-ca-server-config/CA_HOSPITAL2_PRIVATE_KEY -b admin:adminpw -d'
     volumes:
       - ./crypto-config/peerOrganizations/hospital2.ehrecords.com/ca/:/etc/hyperledger/fabric-ca-server-config
     container_name: ca_peerHospital2
     networks:
-      - ehrNetwork
+      - ehrecords
 
   orderer.ehrecords.com:
     extends:
@@ -55,7 +56,7 @@ services:
       service: orderer.ehrecords.com
     container_name: orderer.ehrecords.com
     networks:
-      - ehrNetwork
+      - ehrecords
 
   peer0.hospital1.ehrecords.com:
     container_name: peer0.hospital1.ehrecords.com
@@ -63,7 +64,7 @@ services:
       file:  base/docker-compose-base.yaml
       service: peer0.hospital1.ehrecords.com
     networks:
-      - ehrNetwork
+      - ehrecords
 
   peer1.hospital1.ehrecords.com:
     container_name: peer1.hospital1.ehrecords.com
@@ -71,7 +72,7 @@ services:
       file:  base/docker-compose-base.yaml
       service: peer1.hospital1.ehrecords.com
     networks:
-      - ehrNetwork
+      - ehrecords
 
   peer0.hospital2.ehrecords.com:
     container_name: peer0.hospital2.ehrecords.com
@@ -79,7 +80,7 @@ services:
       file:  base/docker-compose-base.yaml
       service: peer0.hospital2.ehrecords.com
     networks:
-      - ehrNetwork
+      - ehrecords
 
   peer1.hospital2.ehrecords.com:
     container_name: peer1.hospital2.ehrecords.com
@@ -87,4 +88,4 @@ services:
       file:  base/docker-compose-base.yaml
       service: peer1.hospital2.ehrecords.com
     networks:
-      - ehrNetwork
+      - ehrecords
