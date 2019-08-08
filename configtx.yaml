@@ -323,77 +323,77 @@ Profiles:
             Capabilities:
                 <<: *ApplicationCapabilities
 
-    # SampleDevModeKafka:
-    #     <<: *ChannelDefaults
-    #     Capabilities:
-    #         <<: *ChannelCapabilities
-    #     Orderer:
-    #         <<: *OrdererDefaults
-    #         OrdererType: kafka
-    #         Kafka:
-    #             Brokers:
-    #             - kafka.ehrecords.com:9092
+    SampleDevModeKafka:
+        <<: *ChannelDefaults
+        Capabilities:
+            <<: *ChannelCapabilities
+        Orderer:
+            <<: *OrdererDefaults
+            OrdererType: kafka
+            Kafka:
+                Brokers:
+                - kafka.ehrecords.com:9092
 
-    #         Organizations:
-    #         - *OrdererOrg
-    #         Capabilities:
-    #             <<: *OrdererCapabilities
-    #     Application:
-    #         <<: *ApplicationDefaults
-    #         Organizations:
-    #         - <<: *OrdererOrg
-    #     Consortiums:
-    #         SampleConsortium:
-    #             Organizations:
-    #             - *Hospital1
-    #             - *Hospital2
+            Organizations:
+            - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+            - <<: *OrdererOrg
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                - *Hospital1
+                - *Hospital2
 
-    # SampleMultiNodeEtcdRaft:
-    #     <<: *ChannelDefaults
-    #     Capabilities:
-    #         <<: *ChannelCapabilities
-    #     Orderer:
-    #         <<: *OrdererDefaults
-    #         OrdererType: etcdraft
-    #         EtcdRaft:
-    #             Consenters:
-    #             - Host: orderer.ehrecords.com
-    #               Port: 7050
-    #               ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer.ehrecords.com/tls/server.crt
-    #               ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer.ehrecords.com/tls/server.crt
-    #             - Host: orderer2.ehrecords.com
-    #               Port: 7050
-    #               ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer2.ehrecords.com/tls/server.crt
-    #               ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer2.ehrecords.com/tls/server.crt
-    #             - Host: orderer3.ehrecords.com
-    #               Port: 7050
-    #               ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer3.ehrecords.com/tls/server.crt
-    #               ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer3.ehrecords.com/tls/server.crt
-    #             - Host: orderer4.ehrecords.com
-    #               Port: 7050
-    #               ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer4.ehrecords.com/tls/server.crt
-    #               ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer4.ehrecords.com/tls/server.crt
-    #             - Host: orderer5.ehrecords.com
-    #               Port: 7050
-    #               ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer5.ehrecords.com/tls/server.crt
-    #               ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer5.ehrecords.com/tls/server.crt
-    #         Addresses:
-    #             - orderer.ehrecords.com:7050
-    #             - orderer2.ehrecords.com:7050
-    #             - orderer3.ehrecords.com:7050
-    #             - orderer4.ehrecords.com:7050
-    #             - orderer5.ehrecords.com:7050
+    SampleMultiNodeEtcdRaft:
+        <<: *ChannelDefaults
+        Capabilities:
+            <<: *ChannelCapabilities
+        Orderer:
+            <<: *OrdererDefaults
+            OrdererType: etcdraft
+            EtcdRaft:
+                Consenters:
+                - Host: orderer.ehrecords.com
+                  Port: 7050
+                  ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer.ehrecords.com/tls/server.crt
+                  ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer.ehrecords.com/tls/server.crt
+                - Host: orderer2.ehrecords.com
+                  Port: 7050
+                  ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer2.ehrecords.com/tls/server.crt
+                  ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer2.ehrecords.com/tls/server.crt
+                - Host: orderer3.ehrecords.com
+                  Port: 7050
+                  ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer3.ehrecords.com/tls/server.crt
+                  ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer3.ehrecords.com/tls/server.crt
+                - Host: orderer4.ehrecords.com
+                  Port: 7050
+                  ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer4.ehrecords.com/tls/server.crt
+                  ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer4.ehrecords.com/tls/server.crt
+                - Host: orderer5.ehrecords.com
+                  Port: 7050
+                  ClientTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer5.ehrecords.com/tls/server.crt
+                  ServerTLSCert: crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer5.ehrecords.com/tls/server.crt
+            Addresses:
+                - orderer.ehrecords.com:7050
+                - orderer2.ehrecords.com:7050
+                - orderer3.ehrecords.com:7050
+                - orderer4.ehrecords.com:7050
+                - orderer5.ehrecords.com:7050
 
-    #         Organizations:
-    #         - *OrdererOrg
-    #         Capabilities:
-    #             <<: *OrdererCapabilities
-    #     Application:
-    #         <<: *ApplicationDefaults
-    #         Organizations:
-    #         - <<: *OrdererOrg
-    #     Consortiums:
-    #         SampleConsortium:
-    #             Organizations:
-    #             - *Hospital1
-    #             - *Hospital2
+            Organizations:
+            - *OrdererOrg
+            Capabilities:
+                <<: *OrdererCapabilities
+        Application:
+            <<: *ApplicationDefaults
+            Organizations:
+            - <<: *OrdererOrg
+        Consortiums:
+            SampleConsortium:
+                Organizations:
+                - *Hospital1
+                - *Hospital2

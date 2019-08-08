@@ -1,0 +1,79 @@
+# Copyright IBM Corp. All Rights Reserved.
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+# Edited by Juan Iglesias
+
+version: '2'
+
+volumes:
+  orderer2.ehrecords.com:
+  orderer3.ehrecords.com:
+  orderer4.ehrecords.com:
+  orderer5.ehrecords.com:
+
+networks:
+  ehrecords:
+
+services:
+
+  orderer2.ehrecords.com:
+    extends:
+      file: base/peer-base.yaml
+      service: orderer-base
+    container_name: orderer2.ehrecords.com
+    networks:
+    - ehrecords
+    volumes:
+        - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ./crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer2.ehrecords.com/msp:/var/hyperledger/orderer/msp
+        - ./crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer2.ehrecords.com/tls/:/var/hyperledger/orderer/tls
+        - orderer2.ehrecords.com:/var/hyperledger/production/orderer
+    ports:
+    - 8050:7050
+
+  orderer3.ehrecords.com:
+    extends:
+      file: base/peer-base.yaml
+      service: orderer-base
+    container_name: orderer3.ehrecords.com
+    networks:
+    - ehrecords
+    volumes:
+        - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ./crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer3.ehrecords.com/msp:/var/hyperledger/orderer/msp
+        - ./crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer3.ehrecords.com/tls/:/var/hyperledger/orderer/tls
+        - orderer3.ehrecords.com:/var/hyperledger/production/orderer
+    ports:
+    - 9050:7050
+
+  orderer4.ehrecords.com:
+    extends:
+      file: base/peer-base.yaml
+      service: orderer-base
+    container_name: orderer4.ehrecords.com
+    networks:
+    - ehrecords
+    volumes:
+        - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ./crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer4.ehrecords.com/msp:/var/hyperledger/orderer/msp
+        - ./crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer4.ehrecords.com/tls/:/var/hyperledger/orderer/tls
+        - orderer4.ehrecords.com:/var/hyperledger/production/orderer
+    ports:
+    - 10050:7050
+
+  orderer5.ehrecords.com:
+    extends:
+      file: base/peer-base.yaml
+      service: orderer-base
+    container_name: orderer5.ehrecords.com
+    networks:
+    - ehrecords
+    volumes:
+        - ./channel-artifacts/genesis.block:/var/hyperledger/orderer/orderer.genesis.block
+        - ./crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer5.ehrecords.com/msp:/var/hyperledger/orderer/msp
+        - ./crypto-config/ordererOrganizations/ehrecords.com/orderers/orderer5.ehrecords.com/tls/:/var/hyperledger/orderer/tls
+        - orderer5.ehrecords.com:/var/hyperledger/production/orderer
+    ports:
+    - 11050:7050

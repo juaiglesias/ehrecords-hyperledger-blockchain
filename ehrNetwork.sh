@@ -282,10 +282,10 @@ function upgradeNetwork() {
 
 # Tear down running network
 function networkDown() {
-  # stop org3 containers also in addition to org1 and org2, in case we were running sample to add org3
+  # stop org3 containers also in addition to hospital1 and hospital2, in case we were running sample to add org3
   # stop kafka and zookeeper containers in case we're running with kafka consensus-type
-  docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH -f $COMPOSE_FILE_KAFKA -f $COMPOSE_FILE_RAFT2 -f $COMPOSE_FILE_ORG3 down --volumes --remove-orphans
-
+  #docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH -f $COMPOSE_FILE_KAFKA -f $COMPOSE_FILE_RAFT2 down --volumes --remove-orphans
+  docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_KAFKA -f $COMPOSE_FILE_RAFT2 down --volumes --remove-orphans
   # Don't remove the generated artifacts -- note, the ledgers are always removed
   if [ "$MODE" != "restart" ]; then
     # Bring down the network, deleting the volumes
@@ -297,7 +297,7 @@ function networkDown() {
     removeUnwantedImages
     # remove orderer block and other channel configuration transactions and certs
     rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config ./org3-artifacts/crypto-config/ channel-artifacts/org3.json
-    # remove the docker-compose yaml file that was customized to the example
+    # remove the docker-compose yaml file that was customized to the ehrecords
     rm -f docker-compose-e2e.yaml
   fi
 }
@@ -321,14 +321,14 @@ function replacePrivateKey() {
   # The next steps will replace the template's contents with the
   # actual values of the private key file names for the two CAs.
   CURRENT_DIR=$PWD
-  cd crypto-config/peerOrganizations/org1.example.com/ca/
+  cd crypto-config/peerOrganizations/hospital1.ehrecords.com/ca/
   PRIV_KEY=$(ls *_sk)
   cd "$CURRENT_DIR"
-  sed $OPTS "s/CA1_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
-  cd crypto-config/peerOrganizations/org2.example.com/ca/
+  sed $OPTS "s/CA_HOSPITAL1_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
+  cd crypto-config/peerOrganizations/hospital2.ehrecords.com/ca/
   PRIV_KEY=$(ls *_sk)
   cd "$CURRENT_DIR"
-  sed $OPTS "s/CA2_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
+  sed $OPTS "s/CA_HOSPITAL2_PRIVATE_KEY/${PRIV_KEY}/g" docker-compose-e2e.yaml
   # If MacOSX, remove the temporary backup of the docker-compose file
   if [ "$ARCH" == "Darwin" ]; then
     rm docker-compose-e2e.yamlt
@@ -389,7 +389,7 @@ function generateCerts() {
 #
 # Configtxgen consumes a file - ``configtx.yaml`` - that contains the definitions
 # for the sample network. There are three members - one Orderer Org (``OrdererOrg``)
-# and two Peer Orgs (``Org1`` & ``Org2``) each managing and maintaining two peer nodes.
+# and two Peer Orgs (``Hospital1`` & ``Hospital2``) each managing and maintaining two peer nodes.
 # This file also specifies a consortium - ``SampleConsortium`` - consisting of our
 # two Peer Orgs.  Pay specific attention to the "Profiles" section at the top of
 # this file.  You will notice that we have two unique headers. One for the orderer genesis
@@ -397,7 +397,7 @@ function generateCerts() {
 # These headers are important, as we will pass them in as arguments when we create
 # our artifacts.  This file also contains two additional specifications that are worth
 # noting.  Firstly, we specify the anchor peers for each Peer Org
-# (``peer0.org1.example.com`` & ``peer0.org2.example.com``).  Secondly, we point to
+# (``peer0.hospital1.ehrecords.com`` & ``peer0.hospital2.ehrecords.com``).  Secondly, we point to
 # the location of the MSP directory for each member, in turn allowing us to store the
 # root certificates for each Org in the orderer genesis block.  This is a critical
 # concept. Now any network entity communicating with the ordering service can have
