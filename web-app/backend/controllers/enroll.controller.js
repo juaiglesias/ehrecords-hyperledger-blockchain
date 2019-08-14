@@ -2,6 +2,7 @@ const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network')
 const FabricCAServices = require('fabric-ca-client');
 const fs = require('fs');
 const path = require('path');
+const YAML = require('yaml');
 
 // capture network variables from config.json
 const configPath = path.join(process.cwd(), 'config.json');
@@ -16,8 +17,8 @@ var gatewayDiscovery = config.gatewayDiscovery;
 var caName = config.caName;
 
 const ccpPath = path.join(process.cwd(), connection_file);
-const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
-const ccp = JSON.parse(ccpJSON);
+const ccpYAML = fs.readFileSync(ccpPath, 'utf8');
+const ccp = YAML.parse(ccpYAML);
 
 exports.registerUser = async function() {
     try {
@@ -51,7 +52,7 @@ exports.registerUser = async function() {
         const adminIdentity = gateway.getCurrentIdentity();
 
         // Register the user, enroll the user, and import the new identity into the wallet.
-        const secret = await ca.register({ affiliation: 'hospital1.department1', enrollmentID: userName, role: 'client' }, adminIdentity);
+        const secret = await ca.register({ affiliation: 'org1.department1', enrollmentID: userName, role: 'client' }, adminIdentity);
         const enrollment = await ca.enroll({ enrollmentID: userName, enrollmentSecret: secret });
         const userIdentity = X509WalletMixin.createIdentity(orgMSPID, enrollment.certificate, enrollment.key.toBytes());
         wallet.import(userName, userIdentity);

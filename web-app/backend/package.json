@@ -15,7 +15,8 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "fabric-network": "^1.4.4",
-    "webpack": "^4.36.1"
+    "webpack": "^4.36.1",
+    "yaml": "^1.6.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

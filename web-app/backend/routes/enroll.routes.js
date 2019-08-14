@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const usersController = require('../controllers/users.controller');
+const usersController = require('../controllers/enroll.controller');
 
-router.get('/', (_, res) => {
+router.get('/user', (_, res) => {
     usersController.registerUser()
         .then(() => {
             res.send();

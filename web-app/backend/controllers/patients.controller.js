@@ -1,6 +1,7 @@
 const { FileSystemWallet, Gateway, X509WalletMixin } = require('fabric-network');
 const fs = require('fs');
 const path = require('path');
+const YAML = require('yaml');
 
 
 // capture network variables from config.json
@@ -13,8 +14,8 @@ var gatewayDiscovery = config.gatewayDiscovery;
 
 // connect to the connection file
 const ccpPath = path.join(process.cwd(), connection_file);
-const ccpJSON = fs.readFileSync(ccpPath, 'utf8');
-const ccp = JSON.parse(ccpJSON);
+const ccpYAML = fs.readFileSync(ccpPath, 'utf8');
+const ccp = YAML.parse(ccpYAML);
 
 exports.getPatient = async function(id) {
     try {
@@ -39,7 +40,7 @@ exports.getPatient = async function(id) {
         await gateway.connect(ccp, { wallet, identity: userName, discovery: gatewayDiscovery });
 
         // Get the network (channel) our contract is deployed to.
-        const network = await gateway.getNetwork('mychannel');
+        const network = await gateway.getNetwork('ehrchannel');
 
         // Get the contract from the network.
         const contract = network.getContract('ehrecords');
