@@ -90,15 +90,15 @@ installChaincode 0 2
 
 # Instantiate chaincode on peer0.hospital2
 echo "Instantiating chaincode on peer0.hospital2..."
-instantiateChaincode 0 2
+instantiateChaincode 0 1
 
 # Query chaincode on peer0.hospital1
 #echo "Querying chaincode on peer0.hospital1..."
-#chaincodeQuery 0 1 100
+chaincodeQuery 0 1
 
 # Invoke chaincode on peer0.hospital1 and peer0.hospital2
 #echo "Sending invoke transaction on peer0.hospital1 peer0.hospital2..."
-#chaincodeInvoke 0 1 0 2
+chaincodeInvoke 0 1
 
 ## Install chaincode on peer1.hospital2
 echo "Installing chaincode on peer1.hospital2... and peer1.hospital1..."
@@ -107,7 +107,7 @@ installChaincode 1 1
 
 # Query on chaincode on peer1.hospital2, check if the result is 90
 #echo "Querying chaincode on peer1.hospital2..."
-#chaincodeQuery 1 2 90
+chaincodeQuery 1 2
 
 echo
 echo "========= All GOOD execution completed =========== "

@@ -286,6 +286,7 @@ function networkDown() {
   # stop kafka and zookeeper containers in case we're running with kafka consensus-type
   #docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_COUCH -f $COMPOSE_FILE_KAFKA -f $COMPOSE_FILE_RAFT2 down --volumes --remove-orphans
   docker-compose -f $COMPOSE_FILE -f $COMPOSE_FILE_KAFKA -f $COMPOSE_FILE_RAFT2 down --volumes --remove-orphans
+  rm -d ./web-app/backend/wallet -R
   # Don't remove the generated artifacts -- note, the ledgers are always removed
   if [ "$MODE" != "restart" ]; then
     # Bring down the network, deleting the volumes
@@ -299,6 +300,8 @@ function networkDown() {
     rm -rf channel-artifacts/*.block channel-artifacts/*.tx crypto-config ./org3-artifacts/crypto-config/ channel-artifacts/org3.json
     # remove the docker-compose yaml file that was customized to the ehrecords
     rm -f docker-compose-e2e.yaml
+    # remove network connection file
+    rm -f ./web-app/backend/connection.yaml
   fi
 }
 
@@ -333,6 +336,24 @@ function replacePrivateKey() {
   if [ "$ARCH" == "Darwin" ]; then
     rm docker-compose-e2e.yamlt
   fi
+
+  #Need to also replace the connection admin Private key
+  cd crypto-config/peerOrganizations/hospital1.ehrecords.com/users/Admin@hospital1.ehrecords.com/msp/keystore/
+  PRIV_KEY=$(ls *)
+  cd "${CURRENT_DIR}/web-app/backend"
+  cp connection-template.yaml connection.yaml   
+  sed $OPTS "s/HOSPITAL1_ADMINPRIVATEKEY/${PRIV_KEY}/g" connection.yaml
+
+  cd "${CURRENT_DIR}/crypto-config/peerOrganizations/hospital2.ehrecords.com/users/Admin@hospital2.ehrecords.com/msp/keystore/"
+  PRIV_KEY=$(ls *)
+  cd "${CURRENT_DIR}/web-app/backend" 
+  sed $OPTS "s/HOSPITAL2_ADMINPRIVATEKEY/${PRIV_KEY}/g" connection.yaml
+  # If MacOSX, remove the temporary backup of the docker-compose file
+  if [ "$ARCH" == "Darwin" ]; then
+    rm connection.yamlt
+  fi
+
+  cd "$CURRENT_DIR"
 }
 
 # We will use the cryptogen tool to generate the cryptographic material (x509 certs)

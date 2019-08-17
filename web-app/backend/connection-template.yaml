@@ -14,18 +14,18 @@ client:
 
   # Some SDKs support pluggable KV stores, the properties under "credentialStore"
   # are implementation specific
-  credentialStore:
+  #credentialStore:
     # Specific to FileKeyValueStore.js or similar implementations in other SDKs. Can be others
     # if using an alternative impl. For instance, CouchDBKeyValueStore.js would require an object
     # here for properties like url, db name, etc.
-    path: "/tmp/hfc-kvs"
+    #path: "/tmp/hfc-kvs"
 
     # Specific to the CryptoSuite implementation. Software-based implementations like
     # CryptoSuite_ECDSA_AES.js in node SDK requires a key store. PKCS#11 based implementations does
     # not.
-    cryptoStore:
+    #cryptoStore:
       # Specific to the underlying KeyValueStore that backs the crypto key store.
-      path: "/tmp/hfc-cvs"
+      #path: "/tmp/hfc-cvs"
 
   # Sets the connection timeouts for new peer and orderer objects when the client creates
   # peer and orderer objects during the client.getPeer() and client.getOrderer() calls
@@ -129,7 +129,7 @@ organizations:
     # The SDK should allow applications to set the org admin identity via APIs, and only use
     # this route as an alternative when it exists.
     adminPrivateKey:
-      path: ../../crypto-config/peerOrganizations/hospital1.ehrecords.com/users/Admin@hospital1.ehrecords.com/msp/keystore/2566b345d7ba47a74b83ba1fd8fdc2242c07d40f1c96debd5d3585548120a80a_sk
+      path: ../../crypto-config/peerOrganizations/hospital1.ehrecords.com/users/Admin@hospital1.ehrecords.com/msp/keystore/HOSPITAL1_ADMINPRIVATEKEY
     signedCert:
       path: ../../crypto-config/peerOrganizations/hospital1.ehrecords.com/users/Admin@hospital1.ehrecords.com/msp/signcerts/Admin@hospital1.ehrecords.com-cert.pem
 
@@ -146,7 +146,7 @@ organizations:
     certificateAuthorities:
       - ca-hospital2
     adminPrivateKey:
-      path: ../../crypto-config/peerOrganizations/hospital2.ehrecords.com/users/Admin@hospital2.ehrecords.com/msp/keystore/72382ccec72a9f5868bbfdd9d8f383b6352aea62d79820ec8b624f05b1346329_sk
+      path: ../../crypto-config/peerOrganizations/hospital2.ehrecords.com/users/Admin@hospital2.ehrecords.com/msp/keystore/HOSPITAL2_ADMINPRIVATEKEY
     signedCert:
       path: ../../crypto-config/peerOrganizations/hospital2.ehrecords.com/users/Admin@hospital2.ehrecords.com/msp/signcerts/Admin@hospital2.ehrecords.com-cert.pem
 
@@ -179,7 +179,7 @@ peers:
       request-timeout: 120001
 
     tlsCACerts:
-      path: ./../crypto-config/peerOrganizations/hospital1.ehrecords.com/peers/peer0.hospital1.ehrecords.com/msp/tlscacerts/tlsca.hospital1.ehrecords.com-cert.pem
+      path: ../../crypto-config/peerOrganizations/hospital1.ehrecords.com/peers/peer0.hospital1.ehrecords.com/msp/tlscacerts/tlsca.hospital1.ehrecords.com-cert.pem
 
   peer1.hospital1.ehrecords.com:
     url: grpcs://localhost:8051
