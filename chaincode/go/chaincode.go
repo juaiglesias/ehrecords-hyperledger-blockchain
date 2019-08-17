@@ -89,6 +89,7 @@ func (cc *Chaincode) AddRecordToPatient(stub shim.ChaincodeStubInterface, args [
 	}
 
 	//Parse to Time the date
+	//format : yyyy-mm-dd HH:MM
 	myDate, err := time.Parse("2006-01-02 15:04", args[2])
 	if err != nil {
 		return nil, fmt.Errorf("Failed to add Record: Date is not valid")

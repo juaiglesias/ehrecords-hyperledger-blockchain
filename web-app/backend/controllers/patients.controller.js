@@ -92,7 +92,6 @@ exports.getAllPatients = async function() {
         // Evaluate the specified transaction.
         // getPatient transaction - requires arg ID
         const result = await contract.evaluateTransaction('GetAllPatients');
-        console.log(result.toString());
         response.patients = JSON.parse(result.toString());
         console.log(`Transaction has been evaluated, result is: ${JSON.stringify(response)}`);
 
