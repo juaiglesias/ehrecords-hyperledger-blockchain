@@ -158,9 +158,9 @@ func (cc *Chaincode) GetAllPatients(stub shim.ChaincodeStubInterface) ([]byte, e
 			first = false
 		}
 
-		buffer.WriteString("{ 'Key': ")
+		buffer.WriteString("{\"Key\": \"")
 		buffer.WriteString(next.Key)
-		buffer.WriteString(", 'Value': ")
+		buffer.WriteString("\", \"Value\": ")
 		buffer.Write(next.Value)
 		buffer.WriteString("}")
 	}
