@@ -4,7 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import PatientList from '../patientList/PatientList';
-import SearchBoxPatients from '../searchBoxPatients/SearchBoxPatients';
+import {SearchBoxPatients} from '../searchBoxPatients/SearchBoxPatients';
 
 
 const useStyles = makeStyles(theme => ({
@@ -19,9 +19,9 @@ export default function PrincipalPage() {
     const classes = useStyles();
 
     const pacientes = [
-            {'id': 'A', 'firstName': 'Pepe', 'lastName': 'asdas'},
-            {'id': 'B', 'firstName': 'PedfWWe', 'lastName': 'asdas'},
-            {'id': 'C', 'firstName': 'El pity Martinez, que loco que está'}
+        {'id': 'C', 'firstName': 'El pity Martinez, que loco que está'},
+        {'id': 'A', 'firstName': 'Pepe', 'lastName': 'asdas'},
+        {'id': 'B', 'firstName': 'PedfWWe', 'lastName': 'asdas'}
     ];
 
     return (
