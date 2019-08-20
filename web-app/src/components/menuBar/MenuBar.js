@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function AppMenuBar() {
+export default function MenuBar() {
   const classes = useStyles();
 
   return (
@@ -41,7 +41,7 @@ export default function AppMenuBar() {
               About Us
             </Link>
           </nav>
-          <Button href="#" color="primary" variant="outlined" className={classes.link}>
+          <Button href="/patients/" color="primary" variant="outlined" className={classes.link}>
             Login
           </Button>
         </Toolbar>

@@ -2,8 +2,6 @@ import React from 'react';
 import { Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import Box from '@material-ui/core/Box';
-
 
 const useStyles = makeStyles(theme => ({
     heroContent: {
@@ -13,7 +11,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function AppBody() {
+export default function Home() {
     const classes = useStyles();
 
     return (
