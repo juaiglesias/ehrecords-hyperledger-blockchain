@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 
 import PatientList from '../patientList/PatientList';
+import SearchBoxPatients from '../searchBoxPatients/SearchBoxPatients';
 
 
 const useStyles = makeStyles(theme => ({
@@ -31,6 +32,7 @@ export default function PrincipalPage() {
             <Typography variant="h5" align="center" color="textSecondary" component="p">
                 List of Patients
             </Typography>
+            <SearchBoxPatients />
             <PatientList patients={pacientes} />
         </Container>
     );
