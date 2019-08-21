@@ -20,7 +20,7 @@ const styles = {
     },
 };
 
-export class SearchBoxPatients extends React.Component {
+export default class SearchBoxPatients extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -28,25 +28,22 @@ export class SearchBoxPatients extends React.Component {
     }
 
     handleChange(e) {
-        this.setState({temperature: e.target.value});
-    }
-
-    printear() {
-        console.log(`Filtro: ${this.state.filter}`);
+        this.props.onFilterChange(e.target.value);
     }
 
     render() {
-        const filter = this.
+        const filter = this.props.inputValue;
+
         return (
             <Paper style={styles.root}>
                 <InputBase
                     style={styles.input}
                     placeholder="Filter Patients"
+                    value={filter}
                     inputProps={{ 'aria-label': 'filter patients' }}
-                    value={}
-                    onChange={this.handleChange()}
+                    onChange={this.handleChange}
                 />
-                <IconButton style={styles.iconButton} aria-label="search" onClick={this.printear()}>
+                <IconButton style={styles.iconButton} aria-label="search">
                     <SearchIcon />
                 </IconButton>
             </Paper>

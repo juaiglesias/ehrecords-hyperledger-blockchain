@@ -1,39 +1,50 @@
 import React from 'react';
 import { Container } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-
 import PatientList from '../patientList/PatientList';
-import {SearchBoxPatients} from '../searchBoxPatients/SearchBoxPatients';
+import SearchBoxPatients from '../searchBoxPatients/SearchBoxPatients';
 
 
-const useStyles = makeStyles(theme => ({
+const styles = {
     heroContent: {
-        padding: theme.spacing(8, 0, 6),
+        padding: '24px 0px 18px',
         justifyContent: 'center',
         alignItems: 'center',
     },
-}));
+};
 
-export default function PrincipalPage() {
-    const classes = useStyles();
+export default class PrincipalPage extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {filter: ''};
+        this.handleFilterChange = this.handleFilterChange.bind(this);
+    }
 
-    const pacientes = [
-        {'id': 'C', 'firstName': 'El pity Martinez, que loco que está'},
-        {'id': 'A', 'firstName': 'Pepe', 'lastName': 'asdas'},
-        {'id': 'B', 'firstName': 'PedfWWe', 'lastName': 'asdas'}
-    ];
+    handleFilterChange(newValue) {
+        this.setState({filter: newValue});
+    }
 
-    return (
-        <Container maxWidth="sm" component="main" className={classes.heroContent}>
-            <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-            Patients
-            </Typography>
-            <Typography variant="h5" align="center" color="textSecondary" component="p">
-                List of Patients
-            </Typography>
-            <SearchBoxPatients />
-            <PatientList patients={pacientes} />
-        </Container>
-    );
+    render () {
+        const pacientes = [
+            {'id': 'C', 'firstName': 'El pity Martinez, que loco que está', 'lastName': 'asda'},
+            {'id': 'A', 'firstName': 'Pepe', 'lastName': 'asdas'},
+            {'id': 'B', 'firstName': 'PedfWWe', 'lastName': 'asdas'}
+        ];
+
+        const filter = this.state.filter;
+
+        return (
+            <Container maxWidth="sm" component="main" style={styles.heroContent}>
+                <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+                Patients
+                </Typography>
+                <Typography variant="h5" align="center" color="textSecondary" component="p">
+                    List of Patients
+                </Typography>
+                <SearchBoxPatients inputValue={filter} onFilterChange={this.handleFilterChange}/>
+                <PatientList patients={pacientes} filter={filter}/>
+            </Container>
+        );
+
+    }
 }

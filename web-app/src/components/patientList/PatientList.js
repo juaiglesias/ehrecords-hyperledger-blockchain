@@ -6,8 +6,14 @@ import './PatientList.css';
 
 export default function PatientList(props) {
     const patients = props.patients;
-    const listPatients = patients.map((patient) =>
-        <li><PatientSummaryCard key={patient.id} value={patient} /></li>
+    const filter = props.filter;
+    //First filter the patients by the text
+    const listPatients = patients.filter(function(patient){
+        return (patient.id.includes(filter) || 
+                `${patient.firstName} ${patient.lastName}`.includes(filter) ||
+                `${patient.lastName} ${patient.firstName}`.includes(filter));
+    }).map((patient) =>
+        <li key={patient.id}><PatientSummaryCard value={patient} /></li>
     );
 
     return (
