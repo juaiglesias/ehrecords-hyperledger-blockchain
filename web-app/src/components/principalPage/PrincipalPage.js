@@ -7,7 +7,7 @@ import SearchBoxPatients from '../searchBoxPatients/SearchBoxPatients';
 
 const styles = {
     heroContent: {
-        padding: '24px 0px 18px',
+        padding: '64px 0px 48px',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -24,7 +24,7 @@ export default class PrincipalPage extends React.Component {
         this.setState({filter: newValue});
     }
 
-    render () {
+    render() {
         const pacientes = [
             {'id': 'C', 'firstName': 'El pity Martinez, que loco que está', 'lastName': 'asda'},
             {'id': 'A', 'firstName': 'Pepe', 'lastName': 'asdas'},

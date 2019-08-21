@@ -1,12 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles({
+const styles = {
     card: {
       minWidth: 275,
       margin: '10px',
@@ -17,32 +16,41 @@ const useStyles = makeStyles({
     pos: {
       marginBottom: 12,
     },
-});
+};
 
-export default function PatientSummaryCard(props) {
-    const classes = useStyles();
+export default class PatientSummaryCard extends React.Component {
+    constructor(props) {
+      super(props); 
+      this.handleClick = this.handleClick.bind(this);
+    }
 
-    return (
-        <Card className={classes.card}>
-          <CardContent>
-            <Typography className={classes.title} color="textSecondary" gutterBottom>
-              Acá iría algo
-            </Typography>
-            <Typography variant="h5" component="h2">
-              {props.value.firstName} {props.value.lastName}
-            </Typography>
-            <Typography className={classes.pos} color="textSecondary">
-              adjective
-            </Typography>
-            <Typography variant="body2" component="p">
-              well meaning and kindly.
-              <br />
-              {'"a benevolent smile"'}
-            </Typography>
-          </CardContent>
-          <CardActions>
-            <Button size="small">View More</Button>
-          </CardActions>
-        </Card>
-    );
+    handleClick() {
+      this.props.buttonClick();
+    }
+
+    render() {
+      return (
+          <Card style={styles.card}>
+            <CardContent>
+              <Typography style={styles.title} color="textSecondary" gutterBottom>
+                Acá iría algo
+              </Typography>
+              <Typography variant="h5" component="h2">
+                {this.props.value.firstName} {this.props.value.lastName}
+              </Typography>
+              <Typography style={styles.pos} color="textSecondary">
+                adjective
+              </Typography>
+              <Typography variant="body2" component="p">
+                well meaning and kindly.
+                <br />
+                {'"a benevolent smile"'}
+              </Typography>
+            </CardContent>
+            <CardActions>
+              <Button size="small" onClick={this.handleClick}>View More</Button>
+            </CardActions>
+          </Card>
+      );
+    }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PatientSummaryCard from '../patient/PatientSummaryCard';
+import PatientCard from '../patient/PatientCard';
 
 import './PatientList.css';
 
@@ -13,7 +13,7 @@ export default function PatientList(props) {
                 `${patient.firstName} ${patient.lastName}`.includes(filter) ||
                 `${patient.lastName} ${patient.firstName}`.includes(filter));
     }).map((patient) =>
-        <li key={patient.id}><PatientSummaryCard value={patient} /></li>
+        <li key={patient.id}><PatientCard value={patient} /></li>
     );
 
     return (
