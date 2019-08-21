@@ -26,9 +26,12 @@ export default class PrincipalPage extends React.Component {
 
     render() {
         const pacientes = [
-            {'id': 'C', 'firstName': 'El pity Martinez, que loco que está', 'lastName': 'asda'},
-            {'id': 'A', 'firstName': 'Pepe', 'lastName': 'asdas'},
-            {'id': 'B', 'firstName': 'PedfWWe', 'lastName': 'asdas'}
+            {'id': 'C', 'firstName': 'El pity Martinez, que loco que está', 'lastName': 'asda', 'address': 'la vie lalala',
+                'records': [{'information': 'asdasdsa', 'date': '12/27/20', 'doctorId': 's12323'}, 
+                {'information': 'asdasdsa', 'date': '12/27/20', 'doctorId': 's12323'},
+                {'information': 'asdasdsa', 'date': '12/27/20', 'doctorId': 's12323'}]},
+            {'id': 'A', 'firstName': 'Pepe', 'lastName': 'asdas', 'address': 'la vidde lalala', 'records': []},
+            {'id': 'B', 'firstName': 'PedfWWe', 'lastName': 'asdas', 'address': 'ladssfd vie lalala', 'records': []}
         ];
 
         const filter = this.state.filter;
