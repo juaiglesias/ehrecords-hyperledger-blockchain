@@ -32,10 +32,7 @@ export default function MenuBar() {
           </Typography>
           <nav>
             <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Features
-            </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
-              Enterprise
+              EHRecords
             </Link>
             <Link variant="button" color="textPrimary" href="#" className={classes.link}>
               About Us

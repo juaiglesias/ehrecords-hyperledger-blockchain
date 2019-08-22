@@ -5,7 +5,6 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -51,7 +50,6 @@ export default class PatientExpandedCard extends React.Component {
                   <br />
                   {'"a benevolent smile"'}
                 </Typography>
-                <Grid item xs={12} md={6}>
                   <Typography variant="h6">
                     Registers
                   </Typography>
@@ -61,9 +59,8 @@ export default class PatientExpandedCard extends React.Component {
                             primary="Single-line item"
                             secondary="Secondary text"
                           />
-                        </ListItem>,
+                        </ListItem>
                     </List>
-                </Grid>
               </CardContent>
               <CardActions>
                 <Button size="small" onClick={this.handleClick}>View Less</Button>
