@@ -5,11 +5,15 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-
 import FormControl from '@material-ui/core/FormControl';
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-import FormHelperText from '@material-ui/core/FormHelperText';
+
+import SnackBar from '../snackBar/SnackBar';
+
+
+import axios from 'axios';
+import useSnackBar from '../snackBar/useSnackBar';
 
 const styles = {
     card: {
@@ -29,54 +33,96 @@ const styles = {
 };
 
 export default function AddPatientForm(props) {
-    /*const [firstName, setFirstName] = useState('');*/
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [address, setAddress] = useState('');
+    const [age, setAge] = useState('');
     const cancel = props.cancel;
 
+    const {statusSnackBar, setStatusSnackBar, closeSnackBar} = useSnackBar();
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.get('http://localhost:4000/api/patients/')
+            .then(res => {
+                console.log("response:asdsd");
+            })
+            .catch(error => {
+                setStatusSnackBar({message: error.response.data.message, type: "error"});
+            })
+    }
+
+    const inputProps = {
+        min: 0,
+    };
+
     return (
-        <Card style={styles.card}>
-            <CardContent>
-                <Typography variant="h6" component="h2">
-                    New Patient
-                </Typography>
-                <form>
-                    <Grid container>
-                        <Grid item sm={6} xs={12}>
-                            <FormControl>
-                                <InputLabel htmlFor="component-simple">First Name</InputLabel>
-                                <Input id="component-simple" /*value={name} onChange={handleChange}*/ />
-                            </FormControl>
-                        </Grid>
-                        <Grid item sm={6} xs={12}>
-                            <FormControl>
-                                <InputLabel htmlFor="component-simple">Last Name</InputLabel>
-                                <Input id="component-simple" /*value={name} onChange={handleChange}*/ />
-                            </FormControl>
-                        </Grid>
-                        <Grid item sm={6} xs={12}>
-                            <FormControl>
-                                <InputLabel htmlFor="component-simple">Address</InputLabel>
-                                <Input id="component-simple" /*value={name} onChange={handleChange}*/ />
-                            </FormControl>
-                        </Grid>
-                        <Grid item sm={6} xs={12}>
-                            <FormControl>
-                                <InputLabel htmlFor="component-simple">Age</InputLabel>
-                                <Input id="component-simple" /*value={name} onChange={handleChange}*/ />
-                            </FormControl>
-                        </Grid>
-                    </Grid>
+        <React.Fragment>
+            <Card style={styles.card}>
+                <form onSubmit={handleSubmit}>
+                    <CardContent>
+                        <Typography variant="h6" component="h2">
+                            New Patient
+                        </Typography>
+                            <Grid container>
+                                <Grid item sm={6} xs={12}>
+                                    <FormControl>
+                                        <InputLabel htmlFor="firstname-input">First Name *</InputLabel>
+                                        <Input 
+                                            id="firstname-input" 
+                                            value={firstName}
+                                            onChange={e => setFirstName(e.target.value)}
+                                            required/>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item sm={6} xs={12}>
+                                    <FormControl>
+                                        <InputLabel htmlFor="lastname-input">Last Name *</InputLabel>
+                                        <Input 
+                                            id="lastname-input" 
+                                            value={lastName}
+                                            onChange={e => setLastName(e.target.value)}
+                                            required/>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item sm={6} xs={12}>
+                                    <FormControl>
+                                        <InputLabel htmlFor="address-input">Address *</InputLabel>
+                                        <Input 
+                                            id="address-input" 
+                                            value={address}
+                                            onChange={e => setAddress(e.target.value)}
+                                            required/>
+                                    </FormControl>
+                                </Grid>
+                                <Grid item sm={6} xs={12}>
+                                    <FormControl>
+                                        <InputLabel htmlFor="age-input">Age *</InputLabel>
+                                        <Input 
+                                            id="age-input" 
+                                            type="number" 
+                                            value={age}
+                                            onChange={e => setAge(e.target.value)}
+                                            required
+                                            inputProps={inputProps}/*value={name} onChange={handleChange}*/ />
+                                    </FormControl>
+                                </Grid>
+                            </Grid>
+                    </CardContent>
+                    <CardActions>
+                        <div style={styles.rightButtons}>
+                        <Button color="secondary" onClick={cancel}>
+                            Cancel
+                        </Button>
+                        <Button type="submit" color="primary" /*onSubmit={() => { if (window.confirm('Are you sure?')) submit}*/ >
+                            Save
+                        </Button>
+                        </div>
+                    </CardActions>
                 </form>
-            </CardContent>
-            <CardActions>
-                <div style={styles.rightButtons}>
-                <Button color="secondary" onClick={cancel}>
-                    Cancel
-                </Button>
-                <Button color="primary">
-                    Save
-                </Button>
-                </div>
-            </CardActions>
-        </Card>
+            </Card>
+            {statusSnackBar ? <SnackBar msg={statusSnackBar.message} type={statusSnackBar.type} close={closeSnackBar} /> : null}
+        </React.Fragment>
     );
 }
