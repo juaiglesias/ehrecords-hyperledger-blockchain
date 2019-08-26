@@ -2,10 +2,12 @@ const express = require('express');
 const router = express.Router();
 const patientsController = require('../controllers/patients.controller');
 
-router.get('/', (_, res) => {
+router.get('/', (_, res, next) => {
     patientsController.getAllPatients()
         .then((patients) => {
             res.json(patients);
+        }).catch((error) => {
+            next(error);
         });
 });
 
