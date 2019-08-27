@@ -9,11 +9,11 @@ export default function PatientList(props) {
     const filter = props.filter;
     //First filter the patients by the text
     const listPatients = patients.filter(function(patient){
-        return (patient.id.includes(filter) || 
-                `${patient.firstName} ${patient.lastName}`.includes(filter) ||
-                `${patient.lastName} ${patient.firstName}`.includes(filter));
+        return (patient.Key.includes(filter) || 
+                `${patient.Value.firstName} ${patient.Value.lastName}`.includes(filter) ||
+                `${patient.Value.lastName} ${patient.Value.firstName}`.includes(filter));
     }).map((patient) =>
-        <li key={patient.id}><PatientCard value={patient} /></li>
+        <li key={patient.Key}><PatientCard {...patient} /></li>
     );
 
     return (

@@ -44,9 +44,15 @@ export default function AddPatientForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.get('http://localhost:4000/api/patients/')
+        axios.post('http://localhost:4000/api/patients/', {
+                key: "ABsd2",
+                firstName,
+                lastName,
+                age,
+                address
+            })
             .then(res => {
-                console.log("response:asdsd");
+                setStatusSnackBar({message: "Patient added correctly", type: "success"});
             })
             .catch(error => {
                 setStatusSnackBar({message: error.response.data.message, type: "error"});
