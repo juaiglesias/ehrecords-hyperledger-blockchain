@@ -15,7 +15,9 @@ router.post('/', (req, res) => {
     patientsController.createPatient(req.body.key, req.body.firstName, req.body.lastName, req.body.age, req.body.address)
         .then((patient) => {
             res.json(patient);
-        })
+        }).catch((error) => {
+            next(error);
+        });
 });
 
 router.get('/:id', (req, res) => {
