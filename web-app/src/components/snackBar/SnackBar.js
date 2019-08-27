@@ -44,20 +44,6 @@ export default function SnackBar({msg, type, close}) {
           open={true}
           autoHideDuration={6000}
           onClose={close}
-          /*ContentProps={{
-            'aria-describedby': 'message-id',
-          }}
-          message={<span id="message-id">{msg}</span>}
-          action={[
-            <IconButton
-              key="close"
-              aria-label="close"
-              color="inherit"
-              onClick={close}
-            >
-              <CloseIcon />
-            </IconButton>,
-          ]}*/
         >
           <SnackbarContent
             style={style}
