@@ -118,12 +118,12 @@ export default function AddPatientForm(props) {
                     </CardContent>
                     <CardActions>
                         <div style={styles.rightButtons}>
-                        <Button color="secondary" onClick={cancel}>
-                            Cancel
-                        </Button>
-                        <Button type="submit" color="primary" /*onSubmit={() => { if (window.confirm('Are you sure?')) submit}*/ >
-                            Save
-                        </Button>
+                            <Button color="secondary" onClick={cancel}>
+                                Cancel
+                            </Button>
+                            <Button type="submit" color="primary" /*onSubmit={() => { if (window.confirm('Are you sure?')) submit}*/ >
+                                Save
+                            </Button>
                         </div>
                     </CardActions>
                 </form>

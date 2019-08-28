@@ -53,7 +53,7 @@ export default class PatientCard extends React.Component {
                 </Typography>
                 {
                     this.state.isExpanded ?
-                        (<PatientExpandedInfo />)
+                        (<PatientExpandedInfo id={this.props.Key} onExit={this.shrink}/>)
                         : (null)
                 }
               </CardContent>

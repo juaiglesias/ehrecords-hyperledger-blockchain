@@ -11,7 +11,7 @@ router.get('/', (_, res, next) => {
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
     patientsController.createPatient(req.body.key, req.body.firstName, req.body.lastName, req.body.age, req.body.address)
         .then((patient) => {
             res.json(patient);
