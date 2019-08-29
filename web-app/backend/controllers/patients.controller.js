@@ -126,7 +126,7 @@ exports.createPatient = async function(key, firstName, lastName, age, address) {
     // getPatient transaction - requires arg ID
     const result = await contract.submitTransaction('CreatePatient', key, firstName, lastName, age, address);
     
-    response.newPatient = JSON.parse(result.toString());
+    response.newPatient = { Key: key, Value: JSON.parse(result.toString()) };
 
     console.log(`Transaction has been evaluated, result is: ${JSON.stringify(response)}`);
 

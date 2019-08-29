@@ -30,6 +30,7 @@ export default class PrincipalPage extends React.Component {
         this.state = { patients: [], filter: '', addingPatient: false };
         this.handleFilterChange = this.handleFilterChange.bind(this);
         this.toogleAddingPatientStatus = this.toogleAddingPatientStatus.bind(this);
+        this.addPatient = this.addPatient.bind(this);
     }
 
     componentDidMount() {
@@ -49,7 +50,13 @@ export default class PrincipalPage extends React.Component {
     }
 
     toogleAddingPatientStatus() {
-        this.setState({patients: this.state.patients, filter: this.state.filter, addingPatient: !this.state.addingPatient});
+        this.setState({addingPatient: !this.state.addingPatient});
+    }
+
+    addPatient(newPatient) {
+        let newPatientsList = this.state.patients;
+        newPatientsList.unshift(newPatient);
+        this.setState({ patients: newPatientsList }, this.toogleAddingPatientStatus);
     }
 
 
@@ -59,7 +66,7 @@ export default class PrincipalPage extends React.Component {
         let addingPatient;
 
         if (this.state.addingPatient){
-            addingPatient = <AddPatientForm cancel={this.toogleAddingPatientStatus}/>
+            addingPatient = <AddPatientForm addPatient={this.addPatient} cancel={this.toogleAddingPatientStatus}/>
         } else {
             addingPatient = <div style={styles.block}>
                                 <Button style={styles.addButon} onClick={this.toogleAddingPatientStatus}>

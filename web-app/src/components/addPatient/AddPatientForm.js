@@ -29,16 +29,18 @@ const styles = {
 };
 
 export default function AddPatientForm(props) {
+    const [dni,setDni] = useState('');
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [address, setAddress] = useState('');
     const [age, setAge] = useState('');
     const cancel = props.cancel;
+    const addPatient = props.addPatient;
 
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:4000/api/patients/', {
-                key: "ABsd2",
+                key: dni,
                 firstName,
                 lastName,
                 age,
@@ -46,6 +48,7 @@ export default function AddPatientForm(props) {
             })
             .then(res => {
                 openSnackBar({message: "Patient added correctly", type: "success"});
+                addPatient(res.data.newPatient);
             })
             .catch(error => {
                 openSnackBar({message: error.response.data.message, type: "error"});
@@ -64,9 +67,19 @@ export default function AddPatientForm(props) {
                         <Typography variant="h6" component="h2">
                             New Patient
                         </Typography>
-                            <Grid container>
+                            <Grid container spacing={2}>
+                                <Grid item sm={12}>
+                                    <FormControl fullWidth>
+                                        <InputLabel htmlFor="dni-input">DNI *</InputLabel>
+                                        <Input 
+                                            id="dni-input" 
+                                            value={dni}
+                                            onChange={e => setDni(e.target.value)}
+                                            required/>
+                                    </FormControl>
+                                </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <FormControl>
+                                    <FormControl fullWidth>
                                         <InputLabel htmlFor="firstname-input">First Name *</InputLabel>
                                         <Input 
                                             id="firstname-input" 
@@ -76,7 +89,7 @@ export default function AddPatientForm(props) {
                                     </FormControl>
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <FormControl>
+                                    <FormControl fullWidth>
                                         <InputLabel htmlFor="lastname-input">Last Name *</InputLabel>
                                         <Input 
                                             id="lastname-input" 
@@ -86,7 +99,7 @@ export default function AddPatientForm(props) {
                                     </FormControl>
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <FormControl>
+                                    <FormControl fullWidth> 
                                         <InputLabel htmlFor="address-input">Address *</InputLabel>
                                         <Input 
                                             id="address-input" 
@@ -96,7 +109,7 @@ export default function AddPatientForm(props) {
                                     </FormControl>
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <FormControl>
+                                    <FormControl fullWidth>
                                         <InputLabel htmlFor="age-input">Age *</InputLabel>
                                         <Input 
                                             id="age-input" 
