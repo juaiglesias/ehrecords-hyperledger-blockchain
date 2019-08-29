@@ -1,19 +1,15 @@
-import React, { useState } from 'react';
-import Grid from '@material-ui/core/Grid'
+import axios from 'axios';
+import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl';
+import Grid from '@material-ui/core/Grid'
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
-
-import SnackBar from '../snackBar/SnackBar';
-
-
-import axios from 'axios';
-import useSnackBar from '../snackBar/useSnackBar';
+import { openSnackBar } from '../snackBar/SnackBar';
+import React, { useState } from 'react';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
     card: {
@@ -39,9 +35,6 @@ export default function AddPatientForm(props) {
     const [age, setAge] = useState('');
     const cancel = props.cancel;
 
-    const {statusSnackBar, setStatusSnackBar, closeSnackBar} = useSnackBar();
-
-
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post('http://localhost:4000/api/patients/', {
@@ -52,10 +45,10 @@ export default function AddPatientForm(props) {
                 address
             })
             .then(res => {
-                setStatusSnackBar({message: "Patient added correctly", type: "success"});
+                openSnackBar({message: "Patient added correctly", type: "success"});
             })
             .catch(error => {
-                setStatusSnackBar({message: error.response.data.message, type: "error"});
+                openSnackBar({message: error.response.data.message, type: "error"});
             })
     }
 
@@ -111,7 +104,7 @@ export default function AddPatientForm(props) {
                                             value={age}
                                             onChange={e => setAge(e.target.value)}
                                             required
-                                            inputProps={inputProps}/*value={name} onChange={handleChange}*/ />
+                                            inputProps={inputProps} />
                                     </FormControl>
                                 </Grid>
                             </Grid>
@@ -128,7 +121,6 @@ export default function AddPatientForm(props) {
                     </CardActions>
                 </form>
             </Card>
-            {statusSnackBar ? <SnackBar msg={statusSnackBar.message} type={statusSnackBar.type} close={closeSnackBar} /> : null}
         </React.Fragment>
     );
 }

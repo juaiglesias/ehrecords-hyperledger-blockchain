@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import PatientList from '../patientList/PatientList';
 import React from 'react';
 import SearchBoxPatients from '../searchBoxPatients/SearchBoxPatients';
+import { openSnackBar } from '../snackBar/SnackBar';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
@@ -36,6 +37,9 @@ export default class PrincipalPage extends React.Component {
             .then(
                 (result) => {
                     this.setState({ patients: result.data.patients, filter: this.state.filter, addingPatient: this.state.addingPatient });
+                },
+                (error) => {
+                    openSnackBar({message: error.response.data.message, type: "error"});
                 }
             )
     }

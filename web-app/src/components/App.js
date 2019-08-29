@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import './App.css';
 import Footer from './footer/Footer';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import SnackBar from './snackBar/SnackBar';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" exact component={Home} />
             <Route path="/patients" component={PrincipalPage} />
           </Switch>
+          <SnackBar />
           <Footer/>
         </div>
       </Router>

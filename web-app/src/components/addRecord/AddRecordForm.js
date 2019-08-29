@@ -1,11 +1,13 @@
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
-import React, { useState } from 'react';
 import { FormControl, Input, InputLabel } from '@material-ui/core';
+import { openSnackBar } from '../snackBar/SnackBar';
+import React, { useState } from 'react';
 
 const styles = {
     formDiv: {
-        margin: 10
+        marginLeft: 10,
+        marginRight: 10,
     },
     textField: {
       marginLeft: 8,
@@ -29,12 +31,10 @@ export default function AddRecordForm(props) {
                 doctorId: "asdasd"
             })
             .then(res => {
-                /*setStatusSnackBar({message: "Patient added correctly", type: "success"});*/
-                console.log("success");
+                openSnackBar({message: "Record added correctly", type: "success"});
             })
             .catch(error => {
-               /* setStatusSnackBar({message: error.response.data.message, type: "error"});*/
-               console.log("error");
+                openSnackBar({message: error.response.data.message, type: "error"});
             })
             .finally(() => {
                 props.handleExit();

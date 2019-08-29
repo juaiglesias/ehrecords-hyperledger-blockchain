@@ -8,42 +8,80 @@ import ErrorIcon from '@material-ui/icons/Error';
 
 import { red, green } from '@material-ui/core/colors';
 
-export default function SnackBar({msg, type, close}) {
+const variantIcon = {
+  success: CheckCircleIcon,
+  error: ErrorIcon,
+};
 
-    const variantIcon = {
-      success: CheckCircleIcon,
-      error: ErrorIcon,
+const styles = {
+  success: {
+    backgroundColor: green[600],
+  },
+  error: {
+    backgroundColor: red[600],
+  },
+  icon: {
+    fontSize: 20,
+    opacity: 0.9,
+    marginRight: 8,
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center',
+  }
+};
+
+let openSnackBarFn;
+
+export default class SnackBar extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      open: false,
+      message: '',
+      type: '',
     };
+  }
 
-    const styles = {
-      success: {
-        backgroundColor: green[600],
-      },
-      error: {
-        backgroundColor: red[600],
-      },
-      icon: {
-        fontSize: 20,
-        opacity: 0.9,
-        marginRight: 8,
-      },
-      message: {
-        display: 'flex',
-        alignItems: 'center',
-      }
-    };
+  componentDidMount() {
+    openSnackBarFn = this.openSnackBar;
+  }
 
-    const style = (type==="success") ? styles.success : styles.error;
-    const Icon = variantIcon[type];
+  openSnackBar = ({ message, type }) => {
+    this.setState({
+      open: true,
+      message,
+      type,
+    });
+  };
+  
+  handleSnackBarClose = () => {
+    this.setState({
+      open: false,
+    });
+  };
+
+  render() {
+    const type = this.state.type;
+    let Icon = null;
+    let style = null;
+
+    //BY default show error
+    if (variantIcon[type]) Icon = variantIcon[type]
+      else Icon = variantIcon["error"];
+
+    if (styles[type]) style = styles[type]
+      else style = styles["error"];
+
     return (
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'right',
           }}
-          open={true}
+          open={this.state.open}
           autoHideDuration={6000}
-          onClose={close}
+          onClose={this.handleSnackBarClose}
         >
           <SnackbarContent
             style={style}
@@ -51,15 +89,21 @@ export default function SnackBar({msg, type, close}) {
             message={
               <span id="client-snackbar" style={styles.message}>
                 <Icon style={styles.icon} />
-                {msg}
+                {this.state.message}
               </span>
             }
             action={[
-              <IconButton key="close" aria-label="close" color="inherit" onClick={close}>
+              <IconButton key="close" aria-label="close" color="inherit" onClick={this.handleSnackBarClose}>
                 <CloseIcon/>
               </IconButton>,
             ]}
           />
         </Snackbar>
     );
+  }
+ 
+}
+
+export function openSnackBar({message, type}) {
+  openSnackBarFn({message, type});
 }
