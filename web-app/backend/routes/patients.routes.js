@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const patientsController = require('../controllers/patients.controller');
 
-router.get('/', (_, res, next) => {
-    patientsController.getAllPatients()
+router.get('/', (req, res, next) => {
+    patientsController.getAllPatients(req.contract)
         .then((patients) => {
             res.json(patients);
         }).catch((error) => {
@@ -12,7 +12,7 @@ router.get('/', (_, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-    patientsController.createPatient(req.body.key, req.body.firstName, req.body.lastName, req.body.age, req.body.address)
+    patientsController.createPatient(req.contract, req.body.key, req.body.firstName, req.body.lastName, req.body.age, req.body.address)
         .then((patient) => {
             res.json(patient);
         }).catch((error) => {
@@ -20,11 +20,13 @@ router.post('/', (req, res, next) => {
         });
 });
 
-router.get('/:id', (req, res) => {
-    patientsController.getPatient(req.params.id)
+router.get('/:id', (req, res, next) => {
+    patientsController.getPatient(req.contract, req.params.id)
         .then((patient) => {
             res.json(patient);
+        }).catch((error) => {
+            next(error);
         });
-})
+});
 
 module.exports = router;

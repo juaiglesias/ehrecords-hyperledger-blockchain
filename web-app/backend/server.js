@@ -10,9 +10,17 @@ const port = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
-//Routes
-app.use('/api/patients/', require('./routes/patients.routes'));
+//Enrolling route
 app.use('/api/enroll/', require('./routes/enroll.routes'));
+
+//Middleware for Enroll checking
+app.use(require('./middlewares/enrolled.middleware'));
+
+//Middleware for Configuration
+app.use(require('./middlewares/config.middleware'));
+
+//Patient and record routes
+app.use('/api/patients/', require('./routes/patients.routes'));
 app.use('/api/records/', require('./routes/records.routes'));
 
 //Middleware for error handling
