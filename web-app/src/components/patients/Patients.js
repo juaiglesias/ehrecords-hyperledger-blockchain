@@ -26,7 +26,7 @@ class Patients extends React.Component {
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/api/patients/')
+        axios.get(`${process.env.REACT_APP_API_URL}/api/patients/`)
             .then(
                 (result) => {
                     this.setState({ patients: result.data.patients, filter: this.state.filter, addingPatient: this.state.addingPatient });

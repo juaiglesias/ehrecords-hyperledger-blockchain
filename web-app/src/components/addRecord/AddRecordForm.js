@@ -25,7 +25,7 @@ export default function AddRecordForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:4000/api/records/', {
+        axios.post(`${process.env.REACT_APP_API_URL}/api/records/`, {
                 key: props.patientId,
                 information,
                 doctorId: "asdasd"

@@ -34,7 +34,7 @@ export default function AddPatientForm(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post('http://localhost:4000/api/patients/', {
+        axios.post(`${process.env.REACT_APP_API_URL}/api/patients/`, {
                 key: dni,
                 firstName,
                 lastName,

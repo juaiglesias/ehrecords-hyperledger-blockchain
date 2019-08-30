@@ -11,7 +11,7 @@ export default function PatientExpandedInfo(props) {
     const [patientData, setPatientData] = useState({});
 
     useEffect(() => {
-      axios.get(`http://localhost:4000/api/patients/${props.id}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/patients/${props.id}`)
       .then(
         (result) => {
           setPatientData(result.data.patient);
