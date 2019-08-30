@@ -27,14 +27,14 @@ export default function MenuBar() {
   return (
       <AppBar position="static" color="default" elevation={0} className={classes.appBar}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant="h6" color="inherit" noWrap className={classes.toolbarTitle}>
+          <Typography variant="h5" color="inherit" noWrap className={classes.toolbarTitle}>
             Hospital1
           </Typography>
           <nav>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
+            <Link variant="button" color="textPrimary" href="/" className={classes.link}>
               EHRecords
             </Link>
-            <Link variant="button" color="textPrimary" href="#" className={classes.link}>
+            <Link variant="button" color="textPrimary" href="/aboutus/" className={classes.link}>
               About Us
             </Link>
           </nav>

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
@@ -7,26 +8,18 @@ import FormControl from '@material-ui/core/FormControl';
 import Grid from '@material-ui/core/Grid'
 import InputLabel from '@material-ui/core/InputLabel';
 import Input from '@material-ui/core/Input';
+import { makeStyles } from '@material-ui/styles';
 import { openSnackBar } from '../snackBar/SnackBar';
 import React, { useState } from 'react';
 import Typography from '@material-ui/core/Typography';
 
-const styles = {
+const useStyles = makeStyles( theme => ({
     card: {
-      minWidth: 275,
-      margin: '10px',
+          minWidth: 275,
+          margin: theme.spacing(1),
+          padding: theme.spacing(1),
     },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
-    rightButtons: {
-        display: 'inline-block',
-        marginLeft: 'auto',
-    },
-};
+}));
 
 export default function AddPatientForm(props) {
     const [dni,setDni] = useState('');
@@ -36,6 +29,8 @@ export default function AddPatientForm(props) {
     const [age, setAge] = useState('');
     const cancel = props.cancel;
     const addPatient = props.addPatient;
+
+    const classes = useStyles();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -55,18 +50,15 @@ export default function AddPatientForm(props) {
             })
     }
 
-    const inputProps = {
-        min: 0,
-    };
-
     return (
         <React.Fragment>
-            <Card style={styles.card}>
+            <Card className={classes.card}>
                 <form onSubmit={handleSubmit}>
                     <CardContent>
                         <Typography variant="h6" component="h2">
                             New Patient
                         </Typography>
+                        <Box m={1}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12}>
                                     <FormControl fullWidth>
@@ -117,20 +109,21 @@ export default function AddPatientForm(props) {
                                             value={age}
                                             onChange={e => setAge(e.target.value)}
                                             required
-                                            inputProps={inputProps} />
+                                            inputProps={{min: 0,}} />
                                     </FormControl>
                                 </Grid>
                             </Grid>
+                        </Box>
                     </CardContent>
                     <CardActions>
-                        <div style={styles.rightButtons}>
+                        <Box className={"MuiBox-RightAlign"}>
                             <Button color="secondary" onClick={cancel}>
                                 Cancel
                             </Button>
                             <Button type="submit" color="primary" /*onSubmit={() => { if (window.confirm('Are you sure?')) submit}*/ >
                                 Save
                             </Button>
-                        </div>
+                        </Box>
                     </CardActions>
                 </form>
             </Card>

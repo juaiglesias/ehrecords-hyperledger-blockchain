@@ -3,24 +3,23 @@ import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase';
 import IconButton from '@material-ui/core/IconButton';
 import SearchIcon from '@material-ui/icons/Search';
+import { withStyles } from '@material-ui/core';
 
-const styles = {
+const styles = (theme) => ({
     root: {
-      margin: '10px',
-      padding: '4px 4px',
+      margin: theme.spacing(1),
+      padding: theme.spacing(0.5),
       display: 'flex',
       alignItems: 'center',
+      minWidth: 275,
     },
     input: {
       marginLeft: 8,
       flex: 1,
     },
-    iconButton: {
-      padding: 10,
-    },
-};
+});
 
-export default class SearchBoxPatients extends React.Component {
+class SearchBoxPatients extends React.Component {
     constructor(props) {
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -32,21 +31,23 @@ export default class SearchBoxPatients extends React.Component {
     }
 
     render() {
+        const { classes } = this.props;
         const filter = this.props.inputValue;
 
         return (
-            <Paper style={styles.root}>
+            <Paper className={classes.root}>
                 <InputBase
-                    style={styles.input}
+                    className={classes.input}
                     placeholder="Filter Patients"
                     value={filter}
                     inputProps={{ 'aria-label': 'filter patients' }}
                     onChange={this.handleChange}
                 />
-                <IconButton style={styles.iconButton} aria-label="search">
+                <IconButton aria-label="search">
                     <SearchIcon />
                 </IconButton>
             </Paper>
         );
     }
 }
+export default withStyles(styles, { withTheme: true })(SearchBoxPatients);

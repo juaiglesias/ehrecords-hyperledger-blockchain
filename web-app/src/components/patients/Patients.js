@@ -1,5 +1,6 @@
 import AddPatientForm from '../addPatient/AddPatientForm';
 import axios from 'axios';
+import Box from '@material-ui/core/Box';
 import { Container } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import PatientList from '../patientList/PatientList';
@@ -7,24 +8,15 @@ import React from 'react';
 import SearchBoxPatients from '../searchBoxPatients/SearchBoxPatients';
 import { openSnackBar } from '../snackBar/SnackBar';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/styles'; 
 
-const styles = {
-    heroContent: {
-        padding: '64px 0px 48px',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    addButon: {
-        
-        width: '100%',
-        minWidth: 275,
-    },
-    block: {
-        margin: '10px',
-    },
-};
+const styles = (theme) => ({
+    box: {
+        margin: theme.spacing(1),
+    }
+});
 
-export default class PrincipalPage extends React.Component {
+class Patients extends React.Component {
     constructor(props) {
         super(props);
         this.state = { patients: [], filter: '', addingPatient: false };
@@ -61,6 +53,7 @@ export default class PrincipalPage extends React.Component {
 
 
     render() {
+        const { classes } = this.props;
         const patients =  this.state.patients;
         const filter = this.state.filter;
         let addingPatient;
@@ -68,14 +61,14 @@ export default class PrincipalPage extends React.Component {
         if (this.state.addingPatient){
             addingPatient = <AddPatientForm addPatient={this.addPatient} cancel={this.toogleAddingPatientStatus}/>
         } else {
-            addingPatient = <div style={styles.block}>
-                                <Button style={styles.addButon} onClick={this.toogleAddingPatientStatus}>
+            addingPatient = <Box className={classes.box}>
+                                <Button className={"MuiButton-Full"} onClick={this.toogleAddingPatientStatus}>
                                     Add patient
                                 </Button>
-                            </div>
+                            </Box>
         }
         return (
-            <Container maxWidth="sm" component="main" style={styles.heroContent}>
+            <Container maxWidth="sm" component="main" className={"MuiContainer--01"}>
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                     Patients
                 </Typography>
@@ -90,3 +83,4 @@ export default class PrincipalPage extends React.Component {
 
     }
 }
+export default withStyles(styles, { withTheme: true })(Patients);

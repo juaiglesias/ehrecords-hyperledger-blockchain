@@ -1,25 +1,21 @@
 import Button from '@material-ui/core/Button';
+import Box from '@material-ui/core/Box';
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import PatientExpandedInfo from './PatientExpandedInfo';
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core';
 
-const styles = {
+const styles = (theme) => ({
     card: {
       minWidth: 275,
-      margin: '10px',
+      margin: theme.spacing(1),
     },
-    title: {
-      fontSize: 14,
-    },
-    pos: {
-      marginBottom: 12,
-    },
-};
+});
 
-export default class PatientCard extends React.Component {
+class PatientCard extends React.Component {
     constructor(props) {
         super(props);
         this.state = {isExpanded: false};
@@ -36,10 +32,13 @@ export default class PatientCard extends React.Component {
     }
 
     render() {
-        return (
-            <Card style={styles.card}>
-              <CardContent>
-                <Typography style={styles.title} color="textSecondary" gutterBottom>
+      const {classes} = this.props;
+
+      return (
+          <Card className={classes.card}>
+            <CardContent>
+              <Box mb={1}>
+                <Typography color="textSecondary" gutterBottom>
                   DNI {this.props.Key}
                 </Typography>
                 <Typography variant="h5" component="h2">
@@ -48,23 +47,25 @@ export default class PatientCard extends React.Component {
                 <Typography color="textSecondary">
                   Age: {this.props.Value.age}
                 </Typography>
-                <Typography style={styles.pos}  color="textSecondary">
+                <Typography color="textSecondary">
                   Address: {this.props.Value.address}
                 </Typography>
-                {
-                    this.state.isExpanded ?
-                        (<PatientExpandedInfo id={this.props.Key} onExit={this.shrink}/>)
-                        : (null)
-                }
-              </CardContent>
-              <CardActions>
-                {
-                    this.state.isExpanded ? 
-                        (<Button size="small" onClick={this.shrink}>View Less</Button>)
-                        : (<Button size="small" onClick={this.expand}>View More</Button>)
-                }
-              </CardActions>
-            </Card>
-        );
+              </Box>
+              {
+                  this.state.isExpanded ?
+                      (<PatientExpandedInfo id={this.props.Key} onExit={this.shrink}/>)
+                      : (null)
+              }
+            </CardContent>
+            <CardActions>
+              {
+                  this.state.isExpanded ? 
+                      (<Button size="small" onClick={this.shrink}>View Less</Button>)
+                      : (<Button size="small" onClick={this.expand}>View More</Button>)
+              }
+            </CardActions>
+          </Card>
+      );
     }
 }
+export default withStyles(styles, { withTheme: true })(PatientCard);

@@ -1,24 +1,23 @@
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import CloseIcon from '@material-ui/icons/Close';
+import ErrorIcon from '@material-ui/icons/Error';
+import IconButton from '@material-ui/core/IconButton';
 import React from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import ErrorIcon from '@material-ui/icons/Error';
-
-import { red, green } from '@material-ui/core/colors';
+import { withStyles } from '@material-ui/styles';
 
 const variantIcon = {
   success: CheckCircleIcon,
   error: ErrorIcon,
 };
 
-const styles = {
+const styles = (theme) => ({
   success: {
-    backgroundColor: green[600],
+    backgroundColor: theme.palette.success.main,
   },
   error: {
-    backgroundColor: red[600],
+    backgroundColor: theme.palette.error.main,
   },
   icon: {
     fontSize: 20,
@@ -29,11 +28,11 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
   }
-};
+});
 
 let openSnackBarFn;
 
-export default class SnackBar extends React.Component {
+class SnackBar extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -64,14 +63,15 @@ export default class SnackBar extends React.Component {
   render() {
     const type = this.state.type;
     let Icon = null;
-    let style = null;
+    let classSnackBar = null;
+    const {classes} = this.props;
 
     //BY default show error
     if (variantIcon[type]) Icon = variantIcon[type]
       else Icon = variantIcon["error"];
 
-    if (styles[type]) style = styles[type]
-      else style = styles["error"];
+    if (classes[type]) classSnackBar = classes[type]
+      else classSnackBar = classes["error"];
 
     return (
         <Snackbar
@@ -84,11 +84,11 @@ export default class SnackBar extends React.Component {
           onClose={this.handleSnackBarClose}
         >
           <SnackbarContent
-            style={style}
+            className={classSnackBar}
             aria-describedby="client-snackbar"
             message={
-              <span id="client-snackbar" style={styles.message}>
-                <Icon style={styles.icon} />
+              <span id="client-snackbar" className={classes.message}>
+                <Icon className={classes.icon} />
                 {this.state.message}
               </span>
             }
@@ -103,6 +103,7 @@ export default class SnackBar extends React.Component {
   }
  
 }
+export default withStyles(styles, { withTheme: true })(SnackBar);
 
 export function openSnackBar({message, type}) {
   openSnackBarFn({message, type});
