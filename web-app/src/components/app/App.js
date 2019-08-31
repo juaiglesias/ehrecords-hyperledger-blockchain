@@ -1,13 +1,13 @@
-import AboutUs from './aboutUs/AboutUs';
+import AboutUs from '../aboutUs/AboutUs';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {createMuiTheme, CssBaseline} from '@material-ui/core';
-import Footer from './footer/Footer';
-import Home from './home/Home';
-import MenuBar from './menuBar/MenuBar';
-import Patients from './patients/Patients';
+import Footer from '../footer/Footer';
+import Home from '../home/Home';
+import NavBar from '../navBar/NavBar';
+import Patients from '../patients/Patients';
 import React from 'react';
 import { responsiveFontSizes } from '@material-ui/core/styles';
-import SnackBar from './snackBar/SnackBar';
+import SnackBar from '../snackBar/SnackBar';
 import { ThemeProvider } from '@material-ui/styles';
 import { red, green } from '@material-ui/core/colors';
 
@@ -61,7 +61,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Router>
-        <MenuBar/>
+        <NavBar/>
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/patients" component={Patients} />
