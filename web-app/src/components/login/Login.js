@@ -24,12 +24,12 @@ export default function Login() {
         <Container maxWidth="sm" component="main" className={"MuiContainer--01"}>
             <Paper className={classes.paper}>
                 <Grid container spacing={2}>
-                    <Grid item sm={12}>
+                    <Grid item xs={12}>
                         <Typography component="h1" variant="h5" align="center" color="textPrimary" gutterBottom>
                             Welcome to EHRecords
                         </Typography>
                     </Grid>
-                    <Grid item sm={12}>
+                    <Grid item xs={12}>
                         <FormControl fullWidth>
                             <InputLabel htmlFor="username-input">Username</InputLabel>
                             <Input 
@@ -39,7 +39,7 @@ export default function Login() {
                                 required/>
                         </FormControl>
                     </Grid>
-                    <Grid item sm={12}>
+                    <Grid item xs={12}>
                         <FormControl fullWidth>
                             <InputLabel htmlFor="password-input">Password</InputLabel>
                             <Input 
@@ -50,7 +50,7 @@ export default function Login() {
                                 required/>
                         </FormControl>
                     </Grid>
-                    <Grid item sm={12}>
+                    <Grid item xs={12}>
                         <Button type="submit" className={"MuiButton-Full"} variant="contained" size="large" color="primary">
                             Login
                         </Button>
