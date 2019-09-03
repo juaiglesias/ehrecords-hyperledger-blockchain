@@ -4,6 +4,7 @@ import {createMuiTheme, CssBaseline} from '@material-ui/core';
 import Footer from '../footer/Footer';
 import Home from '../home/Home';
 import NavBar from '../navBar/NavBar';
+import Login from '../login/Login';
 import Patients from '../patients/Patients';
 import React from 'react';
 import { responsiveFontSizes } from '@material-ui/core/styles';
@@ -49,6 +50,10 @@ let theme = createMuiTheme({
           display: 'inline-block',
           marginLeft: 'auto',
         },
+        "&.MuiBox-CenterAlign": {
+          display: 'inline-block',
+          alignItems: 'center',
+        }
       }
     }
   }
@@ -64,6 +69,7 @@ function App() {
         <NavBar/>
         <Switch>
           <Route path="/" exact component={Home} />
+          <Route path="/login" component={Login} />
           <Route path="/patients" component={Patients} />
           <Route path="/aboutus" component={AboutUs} />
         </Switch>
