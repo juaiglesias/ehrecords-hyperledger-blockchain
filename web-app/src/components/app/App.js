@@ -1,6 +1,7 @@
 import AboutUs from '../aboutUs/AboutUs';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import {createMuiTheme, CssBaseline} from '@material-ui/core';
+import Enroll from '../enroll/Enroll';
 import Footer from '../footer/Footer';
 import Home from '../home/Home';
 import NavBar from '../navBar/NavBar';
@@ -70,6 +71,7 @@ function App() {
         <Switch>
           <Route path="/" exact component={Home} />
           <Route path="/login" component={Login} />
+          <Route path="/enroll" component={Enroll} />
           <Route path="/patients" component={Patients} />
           <Route path="/aboutus" component={AboutUs} />
         </Switch>

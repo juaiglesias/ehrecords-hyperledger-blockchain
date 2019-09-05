@@ -17,11 +17,14 @@ const useStyles = makeStyles( theme => ({
 
 export default function Login(props) {
     const [userName, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [secret, setSecret] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [newPasswordConfirmation, setNewPasswordConfirmation] = useState('');
+
     const classes = useStyles();
 
-    const redirectToEnroll = () => {
-        props.history.push('/enroll/');
+    const redirectToLogin = () => {
+        props.history.push('/login/');
     }
 
     return (
@@ -30,7 +33,7 @@ export default function Login(props) {
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <Typography component="h1" variant="h5" align="center" color="textPrimary" gutterBottom>
-                            Welcome to EHRecords
+                            Enrollement
                         </Typography>
                     </Grid>
                     <Grid item xs={12}>
@@ -45,23 +48,45 @@ export default function Login(props) {
                     </Grid>
                     <Grid item xs={12}>
                         <FormControl fullWidth>
-                            <InputLabel htmlFor="password-input">Password</InputLabel>
+                            <InputLabel htmlFor="secret-input">Secret</InputLabel>
                             <Input 
                                 id="firstname-input" 
-                                value={password}
+                                value={secret}
                                 type="password"
-                                onChange={e => setPassword(e.target.value)}
+                                onChange={e => setSecret(e.target.value)}
+                                required/>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl fullWidth>
+                            <InputLabel htmlFor="newpassword-input">New Password</InputLabel>
+                            <Input 
+                                id="newpassword-input" 
+                                value={newPassword}
+                                type="password"
+                                onChange={e => setNewPassword(e.target.value)}
+                                required/>
+                        </FormControl>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <FormControl fullWidth>
+                            <InputLabel htmlFor="newpassword-confirmation-input">New Password Confirmation</InputLabel>
+                            <Input 
+                                id="newpassword-confirmation-input" 
+                                value={newPasswordConfirmation}
+                                type="password"
+                                onChange={e => setNewPasswordConfirmation(e.target.value)}
                                 required/>
                         </FormControl>
                     </Grid>
                     <Grid item xs={12}>
                         <Button type="submit" className={"MuiButton-Full"} variant="contained" size="large" color="primary">
-                            Login
+                            Enroll
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button type="submit" className={"MuiButton-Full"}  onClick={redirectToEnroll} size="large" color="primary">
-                            Not registered? Enroll now!
+                        <Button type="submit" className={"MuiButton-Full"} onClick={redirectToLogin} size="large" color="primary">
+                            Return to login
                         </Button>
                     </Grid>
                 </Grid>
