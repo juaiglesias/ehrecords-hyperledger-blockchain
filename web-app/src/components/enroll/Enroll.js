@@ -23,10 +23,6 @@ export default function Login(props) {
 
     const classes = useStyles();
 
-    const redirectToLogin = () => {
-        props.history.push('/login/');
-    }
-
     return (
         <Container maxWidth="sm" component="main" className={"MuiContainer--01"}>
             <Paper className={classes.paper}>
@@ -85,7 +81,7 @@ export default function Login(props) {
                         </Button>
                     </Grid>
                     <Grid item xs={12}>
-                        <Button type="submit" className={"MuiButton-Full"} onClick={redirectToLogin} size="large" color="primary">
+                        <Button type="submit" className={"MuiButton-Full"} href="/login/" size="large" color="primary">
                             Return to login
                         </Button>
                     </Grid>

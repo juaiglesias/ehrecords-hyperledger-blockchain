@@ -38,7 +38,7 @@ export default function NavBar() {
               About Us
             </Link>
           </nav>
-          <Button href="/patients/" color="primary" variant="outlined" className={classes.link}>
+          <Button href="/login/" color="primary" variant="outlined" className={classes.link}>
             Login
           </Button>
         </Toolbar>
