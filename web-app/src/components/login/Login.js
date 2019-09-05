@@ -15,7 +15,7 @@ const useStyles = makeStyles( theme => ({
     }
 }));
 
-export default function Login(props) {
+export default function Login() {
     const [userName, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const classes = useStyles();
