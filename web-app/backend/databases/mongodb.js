@@ -1,11 +1,17 @@
 const mongoose = require('mongoose');
 
-exports.connect = function() {
-    mongoose.connect(process.env.MONGODB_URI, (err) => {
-        if (err) {
-            throw err;
-        } else {
-            return process.env.MONGODB_URI;
-        }
+exports.connect = function() { 
+    return new Promise((resolve, reject) => {
+        mongoose.connect(process.env.MONGODB_URI, { 
+            useNewUrlParser: true, 
+            useCreateIndex: true,
+            useFindAndModify: false
+        }, (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(process.env.MONGODB_URI);
+            }
+        });
     });
 }

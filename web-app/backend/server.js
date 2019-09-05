@@ -13,9 +13,13 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-database.connect().then((dburi) => {
-    console.log(`Connected to database at ${dburi}`);
-});
+//Database connection
+database.connect()
+    .then((dburi) => {
+        console.log(`Connected to database at ${dburi}`);
+    }).catch((err) => {
+        console.log(`Error connecting to the database: ${err}`);
+    });
 
 //Admin routes only for easy enrolling of the admin and registering users
 app.use('/api/admin/', require('./routes/admin.routes'));
@@ -23,7 +27,7 @@ app.use('/api/admin/', require('./routes/admin.routes'));
 //Authentication route
 app.use('/api/user/', require('./routes/user.routes'));
 
-//Middleware for Enroll checking
+//Middleware for auth checking
 app.use(require('./middlewares/authenticated.middleware'));
 
 //Middleware for getting the contract

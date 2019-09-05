@@ -16,7 +16,8 @@ const UserSchema = new mongoose.Schema({
     type: { 
         type: String,
         enum: ['doctor'],
-        default: 'doctor'
+        default: 'doctor',
+        required: true
     }
 });
 

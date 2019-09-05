@@ -25,13 +25,13 @@ exports.login = async function(username, password) {
         if (err) {
             throw new Error("Internal problem, try again.");
         } else if (!user) {
-            throw new Error("Incorrect username or password").status(401);
+            throw new Error("Incorrect username or password");
         } else {
             user.isCorrectPassword(password, (err, same) => {
                 if (err) {
                     throw new Error("Internal problem, try again.");
                 } else if (!same) {
-                    throw new Error("Incorrect username or password").status(401);
+                    throw new Error("Incorrect username or password");
                 } else {
                     //Correct login, we issue a token
                     const payload = { username };
