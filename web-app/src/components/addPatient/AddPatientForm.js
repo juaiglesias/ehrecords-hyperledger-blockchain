@@ -40,6 +40,11 @@ export default function AddPatientForm(props) {
                 lastName,
                 age,
                 address
+            },
+            {
+                'headers': { 
+                    'x-access-token': localStorage.getItem('jwtToken') 
+                } 
             })
             .then(res => {
                 openSnackBar({message: "Patient added correctly", type: "success"});

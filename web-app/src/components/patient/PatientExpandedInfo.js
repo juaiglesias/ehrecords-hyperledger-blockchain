@@ -11,7 +11,12 @@ export default function PatientExpandedInfo(props) {
     const [patientData, setPatientData] = useState({});
 
     useEffect(() => {
-      axios.get(`${process.env.REACT_APP_API_URL}/api/patients/${props.id}`)
+      axios.get(`${process.env.REACT_APP_API_URL}/api/patients/${props.id}`,
+        {
+          'headers': { 
+            'x-access-token': localStorage.getItem('jwtToken') 
+          } 
+        })
       .then(
         (result) => {
           setPatientData(result.data.patient);

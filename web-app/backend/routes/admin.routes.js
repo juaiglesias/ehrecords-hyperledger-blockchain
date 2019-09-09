@@ -4,8 +4,9 @@ const blockchainUsersController = require('../controllers/blockchain.users.contr
 
 router.get('/', (req, res, next) => {
     blockchainUsersController.enrollAdmin()
-        .then(() => {
-            res.send();
+        .then((response) => {
+            console.log(response);
+            res.status(200).send(response);
         })
         .catch((err) => {
             next(err);
@@ -14,8 +15,9 @@ router.get('/', (req, res, next) => {
 
 router.get('/register/:id', (req, res, next) => {
     blockchainUsersController.registerUser(req.params.id)
-        .then((secret) => {
-            res.send(secret)
+        .then((response) => {
+            console.log(response);
+            res.status(200).send(response);
         })
         .catch((err) => {
             next(err);

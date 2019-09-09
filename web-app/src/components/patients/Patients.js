@@ -26,15 +26,19 @@ class Patients extends React.Component {
     }
 
     componentDidMount() {
-        axios.get(`${process.env.REACT_APP_API_URL}/api/patients/`)
-            .then(
-                (result) => {
-                    this.setState({ patients: result.data.patients, filter: this.state.filter, addingPatient: this.state.addingPatient });
-                },
-                (error) => {
-                    openSnackBar({message: error.response.data.message, type: "error"});
-                }
-            )
+        axios.get(`${process.env.REACT_APP_API_URL}/api/patients/`, {
+            'headers': { 
+                'x-access-token': localStorage.getItem('jwtToken') 
+            } 
+        })
+        .then(
+            (result) => {
+                this.setState({ patients: result.data.patients, filter: this.state.filter, addingPatient: this.state.addingPatient });
+            },
+            (error) => {
+                openSnackBar({message: error.response.data.message, type: "error"});
+            }
+        )
     }
 
     handleFilterChange(newValue) {

@@ -29,6 +29,11 @@ export default function AddRecordForm(props) {
                 key: props.patientId,
                 information,
                 doctorId: "asdasd"
+            },
+            {
+                'headers': { 
+                    'x-access-token': localStorage.getItem('jwtToken') 
+                } 
             })
             .then(res => {
                 openSnackBar({message: "Record added correctly", type: "success"});
