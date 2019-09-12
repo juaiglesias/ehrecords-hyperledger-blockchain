@@ -14,7 +14,7 @@ export default function Footer() {
     const classes = useStyles();
 
     return (
-        <Container maxWidth="md" component="footer" className={clsx("MuiContainer--01", classes.footer)}>
+        <Container maxWidth="sm" component="footer" className={clsx("MuiContainer--01", classes.footer)}>
             <Typography variant="body2" color="textSecondary" align="center">
                 {'Hecho por '}
                 <Link color="inherit" target="_blank" href="https://www.linkedin.com/in/juaiglesias/">
