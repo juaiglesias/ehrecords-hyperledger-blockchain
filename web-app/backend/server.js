@@ -31,7 +31,7 @@ app.use('/', function (req, res, next) {
 });
 
 //Admin routes only for easy enrolling of the admin and registering users
-app.use('/api/admin/', require('./routes/admin.routes'));
+app.use('/admin/', require('./routes/admin.routes'));
 
 //Authentication route
 app.use('/api/user/', require('./routes/user.routes'));
@@ -42,7 +42,7 @@ app.use('/api/records/', isAuthenticated, getContract, require('./routes/records
 
 //Middleware for error handling
 app.use((error, req, res, next) => {
-    console.log(error.message);
+    console.log(`Error handling the request: ${error.message}`);
     res.status(error.status || 500).json({
         message: error.message
     });
