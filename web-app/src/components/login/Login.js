@@ -39,7 +39,15 @@ export default function Login(props) {
                 }
             })
             .catch(error => {
-                openSnackBar({message: error.response.data.message, type: "error"});
+                let errorMessage;
+                if (error.response) {
+                    errorMessage = error.response.data.message;
+                } else if (error.message) {
+                    errorMessage = error.message;
+                } else {
+                    errorMessage = "Authentication Error";
+                }
+                openSnackBar({message: errorMessage, type: "error"});
             });
 
     }

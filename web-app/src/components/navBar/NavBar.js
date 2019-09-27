@@ -10,6 +10,7 @@ import { withRouter } from 'react-router-dom';
 const useStyles = makeStyles(theme => ({
   appBar: {
     borderBottom: `1px solid ${theme.palette.divider}`,
+    borderTop: '1px',
   },
   toolbar: {
     flexWrap: 'wrap',

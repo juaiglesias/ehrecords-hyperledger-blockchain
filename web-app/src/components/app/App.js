@@ -63,7 +63,7 @@ let theme = createMuiTheme({
 
 theme = responsiveFontSizes(theme);
 
-function App() {
+export default function App() {
   const [loggedIn, setLoggedIn] = useState(localStorage.getItem('jwtToken'));
 
   const login = (token) => {
@@ -106,5 +106,3 @@ function App() {
     </ThemeProvider>
   );
 }
-
-export default App;
