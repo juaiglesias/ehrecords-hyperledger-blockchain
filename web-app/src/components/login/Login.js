@@ -59,12 +59,12 @@ export default function Login(props) {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography component="h1" variant="h5" align="center" color="textPrimary" gutterBottom>
-                                Welcome to EHRecords
+                                Bienvenido a EHRecords
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel htmlFor="username-input">Username</InputLabel>
+                                <InputLabel htmlFor="username-input">Usuario</InputLabel>
                                 <Input 
                                     id="username-input" 
                                     value={username}
@@ -74,7 +74,7 @@ export default function Login(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel htmlFor="password-input">Password</InputLabel>
+                                <InputLabel htmlFor="password-input">Contraseña</InputLabel>
                                 <Input 
                                     id="firstname-input" 
                                     value={password}
@@ -90,7 +90,7 @@ export default function Login(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <Button className={"MuiButton-Full"} href="/enroll/" size="large" color="primary">
-                                Not registered? Enroll now!
+                                No registrado? Alistate ahora!
                             </Button>
                         </Grid>
                     </Grid>

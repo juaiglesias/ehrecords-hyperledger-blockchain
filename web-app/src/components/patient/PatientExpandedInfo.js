@@ -31,7 +31,7 @@ export default function PatientExpandedInfo(props) {
     return (
       <React.Fragment>
         <Typography variant="h6">
-          Registers
+          Registros
         </Typography>
         <AddRecordForm patientId={props.id} handleExit={handleExit}/>
         <List>

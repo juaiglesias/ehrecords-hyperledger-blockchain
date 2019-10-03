@@ -38,7 +38,7 @@ class SearchBoxPatients extends React.Component {
             <Paper className={classes.root}>
                 <InputBase
                     className={classes.input}
-                    placeholder="Filter Patients"
+                    placeholder="Filtrar Pacientes"
                     value={filter}
                     inputProps={{ 'aria-label': 'filter patients' }}
                     onChange={this.handleChange}

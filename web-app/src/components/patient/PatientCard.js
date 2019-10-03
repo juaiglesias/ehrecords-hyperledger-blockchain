@@ -45,10 +45,10 @@ class PatientCard extends React.Component {
                   {this.props.Value.firstName} {this.props.Value.lastName}
                 </Typography>
                 <Typography color="textSecondary">
-                  Age: {this.props.Value.age}
+                  Edad: {this.props.Value.age}
                 </Typography>
                 <Typography color="textSecondary">
-                  Address: {this.props.Value.address}
+                  Dirección: {this.props.Value.address}
                 </Typography>
               </Box>
               {
@@ -60,8 +60,8 @@ class PatientCard extends React.Component {
             <CardActions>
               {
                   this.state.isExpanded ? 
-                      (<Button size="small" onClick={this.shrink}>View Less</Button>)
-                      : (<Button size="small" onClick={this.expand}>View More</Button>)
+                      (<Button size="small" onClick={this.shrink}>Ver menos</Button>)
+                      : (<Button size="small" onClick={this.expand}>Ver más</Button>)
               }
             </CardActions>
           </Card>

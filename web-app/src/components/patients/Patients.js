@@ -67,17 +67,17 @@ class Patients extends React.Component {
         } else {
             addingPatient = <Box className={classes.box}>
                                 <Button className={"MuiButton-Full"} onClick={this.toogleAddingPatientStatus}>
-                                    Add patient
+                                    Agregar Paciente
                                 </Button>
                             </Box>
         }
         return (
             <Container maxWidth="sm" component="main" className={"MuiContainer--01"}>
                 <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
-                    Patients
+                    Pacientes
                 </Typography>
                 <Typography variant="h5" align="center" color="textSecondary" component="p">
-                    List of Patients
+                    Lista de Pacientes
                 </Typography>
                 <SearchBoxPatients inputValue={filter} onFilterChange={this.handleFilterChange}/>
                 {addingPatient}

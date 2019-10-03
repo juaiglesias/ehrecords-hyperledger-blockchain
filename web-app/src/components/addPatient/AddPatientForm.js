@@ -47,7 +47,7 @@ export default function AddPatientForm(props) {
                 } 
             })
             .then(res => {
-                openSnackBar({message: "Patient added correctly", type: "success"});
+                openSnackBar({message: "Paciente agregado correctamente", type: "success"});
                 addPatient(res.data.newPatient);
             })
             .catch(error => {
@@ -61,7 +61,7 @@ export default function AddPatientForm(props) {
                 <form onSubmit={handleSubmit}>
                     <CardContent>
                         <Typography variant="h6" component="h2">
-                            New Patient
+                            Nuevo Paciente
                         </Typography>
                         <Box m={1}>
                             <Grid container spacing={2}>
@@ -77,7 +77,7 @@ export default function AddPatientForm(props) {
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
                                     <FormControl fullWidth>
-                                        <InputLabel htmlFor="firstname-input">First Name *</InputLabel>
+                                        <InputLabel htmlFor="firstname-input">Nombre *</InputLabel>
                                         <Input 
                                             id="firstname-input" 
                                             value={firstName}
@@ -87,7 +87,7 @@ export default function AddPatientForm(props) {
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
                                     <FormControl fullWidth>
-                                        <InputLabel htmlFor="lastname-input">Last Name *</InputLabel>
+                                        <InputLabel htmlFor="lastname-input">Apellido *</InputLabel>
                                         <Input 
                                             id="lastname-input" 
                                             value={lastName}
@@ -97,7 +97,7 @@ export default function AddPatientForm(props) {
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
                                     <FormControl fullWidth> 
-                                        <InputLabel htmlFor="address-input">Address *</InputLabel>
+                                        <InputLabel htmlFor="address-input">Dirección *</InputLabel>
                                         <Input 
                                             id="address-input" 
                                             value={address}
@@ -107,7 +107,7 @@ export default function AddPatientForm(props) {
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
                                     <FormControl fullWidth>
-                                        <InputLabel htmlFor="age-input">Age *</InputLabel>
+                                        <InputLabel htmlFor="age-input">Edad *</InputLabel>
                                         <Input 
                                             id="age-input" 
                                             type="number" 
@@ -123,10 +123,10 @@ export default function AddPatientForm(props) {
                     <CardActions>
                         <Box className={"MuiBox-RightAlign"}>
                             <Button color="secondary" onClick={cancel}>
-                                Cancel
+                                Cancelar
                             </Button>
                             <Button type="submit" color="primary" /*onSubmit={() => { if (window.confirm('Are you sure?')) submit}*/ >
-                                Save
+                                Guardar
                             </Button>
                         </Box>
                     </CardActions>

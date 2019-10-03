@@ -41,7 +41,7 @@ function NavBar(props) {
             { props.loggedIn ?
               (
                 <Link variant="button" color="textPrimary" href="/patients" className={classes.link}>
-                  Patients
+                  Pacientes
                 </Link>
               ) :
               (

@@ -36,7 +36,7 @@ export default function AddRecordForm(props) {
                 } 
             })
             .then(res => {
-                openSnackBar({message: "Record added correctly", type: "success"});
+                openSnackBar({message: "Registro agregado correctamente", type: "success"});
             })
             .catch(error => {
                 openSnackBar({message: error.response.data.message, type: "error"});
@@ -50,7 +50,7 @@ export default function AddRecordForm(props) {
         <div style={styles.formDiv}>
             <form onSubmit={handleSubmit}>
                 <FormControl margin="normal" fullWidth>
-                    <InputLabel htmlFor="msg">Add New Record *</InputLabel>
+                    <InputLabel htmlFor="msg">Agregar nuevo registro *</InputLabel>
                     <Input 
                         id="msg" 
                         value={information} 
@@ -61,7 +61,7 @@ export default function AddRecordForm(props) {
                     />
                 </FormControl>
                 <Button type="submit" size="small" variant="outlined" color="primary">
-                Submit
+                Enviar
                 </Button>
             </form>
         </div>

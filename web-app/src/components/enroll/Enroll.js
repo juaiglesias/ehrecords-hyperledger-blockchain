@@ -28,7 +28,7 @@ export default function Enroll(props) {
     const validateForm = () => {
         let errors = [];
         if (newPassword !== newPasswordConfirmation){
-            errors.push("The passwords don't match");
+            errors.push("Las contraseñas no coinciden");
         }
         return errors;
     };
@@ -36,8 +36,7 @@ export default function Enroll(props) {
     const handleSubmit = (e) => {
         e.preventDefault();
         const errors = validateForm();
-            
-        if (errors) {
+        if (errors.length) {
             errors.forEach(error => {
                 openSnackBar({message: error, type: "error"});
             });
@@ -49,7 +48,7 @@ export default function Enroll(props) {
                 })
                 .then(res => {
                     if (res.status === 200) {
-                        openSnackBar({message: res.data, type: "success"})
+                        openSnackBar({message: res.data.message, type: "success"})
                         props.history.push("/login");
                         return;
                     } else {
@@ -69,12 +68,12 @@ export default function Enroll(props) {
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
                             <Typography component="h1" variant="h5" align="center" color="textPrimary" gutterBottom>
-                                Enrollement
+                                Enrollment
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel htmlFor="username-input">Username</InputLabel>
+                                <InputLabel htmlFor="username-input">Usuario</InputLabel>
                                 <Input 
                                     id="username-input" 
                                     value={username}
@@ -84,7 +83,7 @@ export default function Enroll(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel htmlFor="secret-input">Secret</InputLabel>
+                                <InputLabel htmlFor="secret-input">Secreto</InputLabel>
                                 <Input 
                                     id="firstname-input" 
                                     value={secret}
@@ -95,7 +94,7 @@ export default function Enroll(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel htmlFor="newpassword-input">New Password</InputLabel>
+                                <InputLabel htmlFor="newpassword-input">Nueva Contraseña</InputLabel>
                                 <Input 
                                     id="newpassword-input" 
                                     value={newPassword}
@@ -106,7 +105,7 @@ export default function Enroll(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControl fullWidth>
-                                <InputLabel htmlFor="newpassword-confirmation-input">New Password Confirmation</InputLabel>
+                                <InputLabel htmlFor="newpassword-confirmation-input">Confirmación de la nueva contraseña</InputLabel>
                                 <Input 
                                     id="newpassword-confirmation-input" 
                                     value={newPasswordConfirmation}
@@ -122,7 +121,7 @@ export default function Enroll(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <Button className={"MuiButton-Full"} href="/login/" size="large" color="primary">
-                                Return to login
+                                Volver al login
                             </Button>
                         </Grid>
                     </Grid>
