@@ -2,13 +2,6 @@ const express = require('express');
 const router = express.Router();
 const recordsController = require('../controllers/records.controller');
 
-router.post('/', (req, res, next) => {
-    recordsController.addRecordToPatient(req.contract, req.body.key, req.body.information, req.username)
-        .then((patient) => {
-            res.json(patient);
-        }).catch((error) => {
-            next(error);
-        });
-})
+router.post('/', recordsController.addRecordToPatient);
 
 module.exports = router;

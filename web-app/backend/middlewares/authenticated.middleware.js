@@ -8,7 +8,9 @@ module.exports = function(req, res, next) {
     } else {
         jwt.verify(token, process.env.SECRET, function(err, decoded) {
             if (err) {
-                next(new Error("Unauthorized: Invalid token"));
+                err.message = "Unauthorized";
+                err.status = 401;
+                next(err);
             } else {
                 console.log(decoded);
                 req.username = decoded.username;

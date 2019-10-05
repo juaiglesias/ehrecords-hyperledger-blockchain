@@ -1,4 +1,4 @@
-const { getGatewayConnection } = require('../controllers/blockchain.users.controller');
+const { getGatewayConnection } = require('../services/blockchain.users.service');
 
 module.exports = async function (req, res, next) {
     try {

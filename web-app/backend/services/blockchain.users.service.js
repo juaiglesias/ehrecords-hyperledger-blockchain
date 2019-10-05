@@ -32,8 +32,6 @@ exports.getGatewayConnection = getGatewayConnection;
 
 exports.registerUser = async function(username) {
     try {
-        console.log(`Wallet path: ${walletPath}`);
-
         // Check to see if we've already enrolled the user.
         const userExists = await wallet.exists(username);
         if (userExists) {
@@ -69,8 +67,6 @@ exports.registerUser = async function(username) {
 
 exports.enrollUser = async function (username, secret) {
     try {
-        console.log(`Wallet path: ${walletPath}`);
-
         // Check to see if we've already enrolled the user.
         const userExists = await wallet.exists(username);
         if (userExists) {
@@ -99,9 +95,7 @@ exports.enrollUser = async function (username, secret) {
 
 exports.enrollAdmin = async function() {
     try {
-        console.log(`Wallet path: ${walletPath}`);
-
-        console.log(`Trying to enroll admin user ${appAdmin}`)
+        console.log(`Trying to enroll admin user ${appAdmin}`);
         // Create a new CA client for interacting with the CA.
         const caURL = ccp.certificateAuthorities[caName].url;
         const ca = new FabricCAServices(caURL);
