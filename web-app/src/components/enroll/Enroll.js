@@ -72,7 +72,7 @@ export default function Enroll(props) {
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel htmlFor="username-input">Usuario</InputLabel>
                                 <Input 
                                     id="username-input" 
@@ -82,7 +82,7 @@ export default function Enroll(props) {
                             </FormControl>
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel htmlFor="secret-input">Secreto</InputLabel>
                                 <Input 
                                     id="firstname-input" 
@@ -93,7 +93,7 @@ export default function Enroll(props) {
                             </FormControl>
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel htmlFor="newpassword-input">Nueva Contraseña</InputLabel>
                                 <Input 
                                     id="newpassword-input" 
@@ -104,7 +104,7 @@ export default function Enroll(props) {
                             </FormControl>
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel htmlFor="newpassword-confirmation-input">Confirmación de la nueva contraseña</InputLabel>
                                 <Input 
                                     id="newpassword-confirmation-input" 

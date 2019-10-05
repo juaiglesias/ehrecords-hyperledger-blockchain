@@ -49,8 +49,8 @@ export default function AddRecordForm(props) {
     return (
         <div style={styles.formDiv}>
             <form onSubmit={handleSubmit}>
-                <FormControl margin="normal" fullWidth>
-                    <InputLabel htmlFor="msg">Agregar nuevo registro *</InputLabel>
+                <FormControl margin="normal" fullWidth required>
+                    <InputLabel htmlFor="msg">Agregar nuevo registro</InputLabel>
                     <Input 
                         id="msg" 
                         value={information} 

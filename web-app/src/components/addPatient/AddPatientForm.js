@@ -66,8 +66,8 @@ export default function AddPatientForm(props) {
                         <Box m={1}>
                             <Grid container spacing={2}>
                                 <Grid item sm={12}>
-                                    <FormControl fullWidth>
-                                        <InputLabel htmlFor="dni-input">DNI *</InputLabel>
+                                    <FormControl fullWidth required>
+                                        <InputLabel htmlFor="dni-input">DNI</InputLabel>
                                         <Input 
                                             id="dni-input" 
                                             value={dni}
@@ -76,8 +76,8 @@ export default function AddPatientForm(props) {
                                     </FormControl>
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <FormControl fullWidth>
-                                        <InputLabel htmlFor="firstname-input">Nombre *</InputLabel>
+                                    <FormControl fullWidth required>
+                                        <InputLabel htmlFor="firstname-input">Nombre</InputLabel>
                                         <Input 
                                             id="firstname-input" 
                                             value={firstName}
@@ -86,8 +86,8 @@ export default function AddPatientForm(props) {
                                     </FormControl>
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <FormControl fullWidth>
-                                        <InputLabel htmlFor="lastname-input">Apellido *</InputLabel>
+                                    <FormControl fullWidth required>
+                                        <InputLabel htmlFor="lastname-input">Apellido</InputLabel>
                                         <Input 
                                             id="lastname-input" 
                                             value={lastName}
@@ -96,8 +96,8 @@ export default function AddPatientForm(props) {
                                     </FormControl>
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <FormControl fullWidth> 
-                                        <InputLabel htmlFor="address-input">Dirección *</InputLabel>
+                                    <FormControl fullWidth required> 
+                                        <InputLabel htmlFor="address-input">Dirección</InputLabel>
                                         <Input 
                                             id="address-input" 
                                             value={address}
@@ -106,8 +106,8 @@ export default function AddPatientForm(props) {
                                     </FormControl>
                                 </Grid>
                                 <Grid item sm={6} xs={12}>
-                                    <FormControl fullWidth>
-                                        <InputLabel htmlFor="age-input">Edad *</InputLabel>
+                                    <FormControl fullWidth required>
+                                        <InputLabel htmlFor="age-input">Edad</InputLabel>
                                         <Input 
                                             id="age-input" 
                                             type="number" 

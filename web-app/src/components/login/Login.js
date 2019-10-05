@@ -63,7 +63,7 @@ export default function Login(props) {
                             </Typography>
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel htmlFor="username-input">Usuario</InputLabel>
                                 <Input 
                                     id="username-input" 
@@ -73,7 +73,7 @@ export default function Login(props) {
                             </FormControl>
                         </Grid>
                         <Grid item xs={12}>
-                            <FormControl fullWidth>
+                            <FormControl fullWidth required>
                                 <InputLabel htmlFor="password-input">Contraseña</InputLabel>
                                 <Input 
                                     id="firstname-input" 
