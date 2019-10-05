@@ -94,7 +94,7 @@ export default function App() {
             loggedIn ? (
               <Redirect to="/patients" />
             ) : (
-              <Enroll/>
+              <Enroll {...props} />
             )
           ) } />
           <Route path="/patients" render={ props => <WithAuth Component={Patients} {...props} />} />
