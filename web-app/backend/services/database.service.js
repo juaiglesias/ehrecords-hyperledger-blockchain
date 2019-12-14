@@ -5,7 +5,7 @@ exports.userRegistration = async function(username, password) {
         const user = new User({username, password});
         await user.save();
     } catch (erro) {
-        throw new Error(`Failed to register user ${username} in the database. ${err}`);
+        throw new Error(`Error al registrar al usuario ${username} en la base de datos. ${err}`);
     }  
 }
 
@@ -13,10 +13,10 @@ exports.getUser = async function(username) {
     try {
         const user = await User.findOne({ username }).exec();
         if (!user) {
-            throw new Error("No username found with that name");
+            throw new Error("No se encontró ningún usuario con el nombre provisto.");
         }
         return user;
     } catch (err) {
-        throw new Error(`Failed to get user: ${err}`);
+        throw new Error(`Fallo al obtener el usuario: ${err}`);
     }
 }

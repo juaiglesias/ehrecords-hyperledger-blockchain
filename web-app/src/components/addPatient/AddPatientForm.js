@@ -125,7 +125,7 @@ export default function AddPatientForm(props) {
                             <Button color="secondary" onClick={cancel}>
                                 Cancelar
                             </Button>
-                            <Button type="submit" color="primary" /*onSubmit={() => { if (window.confirm('Are you sure?')) submit}*/ >
+                            <Button type="submit" color="primary">
                                 Guardar
                             </Button>
                         </Box>

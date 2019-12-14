@@ -86,16 +86,16 @@ exports.enrollUser = async function (username, secret) {
         const userIdentity = X509WalletMixin.createIdentity(orgMSPID, enrollment.certificate, enrollment.key.toBytes());
         wallet.import(username, userIdentity);
         
-        return `Successfully enrolled user ${username} and imported it into the wallet`;
+        return `El ${username} fue alistado correctamente`;
 
     } catch(error) {
-        throw new Error(`Failed to enroll user ${username}. ${error}`);
+        throw new Error(`Fallo en alistar al usuario ${username}. ${error}`);
     }
 }
 
 exports.enrollAdmin = async function() {
     try {
-        console.log(`Trying to enroll admin user ${appAdmin}`);
+        console.log(`Intentando alistar al administrador ${appAdmin}`);
         // Create a new CA client for interacting with the CA.
         const caURL = ccp.certificateAuthorities[caName].url;
         const ca = new FabricCAServices(caURL);
@@ -104,9 +104,9 @@ exports.enrollAdmin = async function() {
         const enrollment = await ca.enroll({ enrollmentID: appAdmin, enrollmentSecret: appAdminSecret });
         const identity = X509WalletMixin.createIdentity(orgMSPID, enrollment.certificate, enrollment.key.toBytes());
         wallet.import(appAdmin, identity);
-        return `Successfully enrolled admin user ${appAdmin} and imported it into the wallet`;
+        return `Usuario administrador ${appAdmin} enlistado correctamente`;
 
     } catch(error) {
-        throw new Error(`Failed to enroll admin user ${appAdmin}. ${error}`);
+        throw new Error(`Hubo un error alistar al administrador ${appAdmin}. ${error}`);
     }
 }
