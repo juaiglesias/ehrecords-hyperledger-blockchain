@@ -86,7 +86,7 @@ exports.enrollUser = async function (username, secret) {
         const userIdentity = X509WalletMixin.createIdentity(orgMSPID, enrollment.certificate, enrollment.key.toBytes());
         wallet.import(username, userIdentity);
         
-        return `El ${username} fue alistado correctamente`;
+        return `El usuario ${username} fue alistado correctamente`;
 
     } catch(error) {
         throw new Error(`Fallo en alistar al usuario ${username}. ${error}`);
