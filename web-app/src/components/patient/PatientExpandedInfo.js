@@ -42,7 +42,7 @@ export default function PatientExpandedInfo(props) {
                   <ListItem key={record.date}>
                     <ListItemText
                       primary={record.information}
-                      secondary={"Edited by "+record.doctorId+" the "+record.date}
+                      secondary={"Editado por "+record.doctorId+" el "+record.date.toLocaleString()}
                     />
                   </ListItem>
                 )

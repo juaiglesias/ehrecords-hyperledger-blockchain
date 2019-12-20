@@ -5,5 +5,5 @@
     "orgMSPID": "Hospital1MSP",
     "caName": "ca-hospital1",
     "userName": "user1",
-    "gatewayDiscovery": { "enabled": true, "asLocalhost": false }
+    "gatewayDiscovery": { "enabled": true, "asLocalhost": true }
 }

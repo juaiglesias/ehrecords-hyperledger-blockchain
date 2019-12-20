@@ -4,7 +4,7 @@ exports.userRegistration = async function(username, password) {
     try {
         const user = new User({username, password});
         await user.save();
-    } catch (erro) {
+    } catch (err) {
         throw new Error(`Error al registrar al usuario ${username} en la base de datos. ${err}`);
     }  
 }
