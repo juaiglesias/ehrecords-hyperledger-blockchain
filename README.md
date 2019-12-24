@@ -11,4 +11,4 @@
 * Run **GET /admin/register/{username}** to register any user
 * In the frontend enroll user with the secret code
 * Have fun!!
-**IMPORTANT: If you restart the server you need to cleanup the mongodb table of users.**
+* **IMPORTANT: If you restart the server you need to cleanup the mongodb table of users.**
