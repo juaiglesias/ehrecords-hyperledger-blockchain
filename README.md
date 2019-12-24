@@ -1,5 +1,6 @@
 # ehrecords-hyperledger-blockchain
 ## Electronic Health Records blockchain implemented using Hyperledger Fabric framework.
+## Computer Systems Engineering Final Year Project
 
 ### Instructions to execute
 * Check that you installed al the requirements of Hyperledger Fabric (https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html)
