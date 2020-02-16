@@ -3,6 +3,7 @@
 
 ### Instructions to execute
 * Check that you installed al the requirements of Hyperledger Fabric (https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html)
+* Download the fabric-samples (Version 1.4.0) and copy the bin folder into the project.
 * Install MongoDB (https://www.mongodb.com/)
 * Run the fabric network from the root directory with the command **./ehrNetwork.sh up**
 * In /web-app/backend/ execute **npm run dev** to run the node.js server.
