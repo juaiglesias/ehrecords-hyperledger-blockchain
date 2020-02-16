@@ -5,6 +5,9 @@
 * Check that you installed al the requirements of Hyperledger Fabric (https://hyperledger-fabric.readthedocs.io/en/release-1.4/prereqs.html)
 * Download the fabric-samples (Version 1.4.0) and copy the bin folder into the project.
 * Install MongoDB (https://www.mongodb.com/)
+* Define a .env file in the backend folder with the constants MONGODB_URI (uri of mongodb), SECRET (String that will be
+  used for the JWT generation) and PORT (To run the server. Must be the same port that the one defined in REACT_APP_API_URL
+  at the start script of the frontend - File: package.json).
 * Run the fabric network from the root directory with the command **./ehrNetwork.sh up**
 * In /web-app/backend/ execute **npm run dev** to run the node.js server.
 * In /web-app execute **npm start** to run the reactJS application.
