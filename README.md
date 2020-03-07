@@ -8,6 +8,7 @@
 * Define a .env file in the backend folder with the constants MONGODB_URI (uri of mongodb), SECRET (String that will be
   used for the JWT generation) and PORT (To run the server. Must be the same port that the one defined in REACT_APP_API_URL
   at the start script of the frontend - File: package.json).
+  For example: `PORT=4000 MONGODB_URI=mongodb://127.0.0.1:27017 SECRET='my_secret'
 * Run the fabric network from the root directory with the command **./ehrNetwork.sh up**
 * In /web-app/backend/ execute **npm run dev** to run the node.js server.
 * In /web-app execute **npm start** to run the reactJS application.
