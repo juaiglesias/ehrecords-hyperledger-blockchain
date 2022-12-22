@@ -18,7 +18,7 @@
     "dateformat": "^3.0.3",
     "express": "^4.17.1",
     "fabric-network": "^1.4.4",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.6.12",
     "webpack": "^4.36.1",
     "yaml": "^1.6.0"
