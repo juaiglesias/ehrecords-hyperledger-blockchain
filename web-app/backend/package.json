@@ -20,7 +20,7 @@
     "fabric-network": "^1.4.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.6.12",
-    "webpack": "^4.36.1",
+    "webpack": "^5.75.0",
     "yaml": "^1.6.0"
   },
   "devDependencies": {
